@@ -1,6 +1,8 @@
 package xed
 
 import (
+	"github.com/ddkwork/app/bindgen/clang"
+	"github.com/ddkwork/app/bindgen/gengo"
 	"io/fs"
 	"path/filepath"
 	"strings"
@@ -10,8 +12,7 @@ import (
 	"github.com/ddkwork/golibrary/stream"
 )
 
-func TestBindGen(t *testing.T) {
-	// merge header files
+func TestMergeHeader(t *testing.T) {
 	filepath.Walk("kits/xed-install-base-2024-11-27-win-x86-64/include/xed", func(path string, info fs.FileInfo, err error) error {
 		if info.IsDir() {
 			return nil
@@ -20,6 +21,20 @@ func TestBindGen(t *testing.T) {
 		return err
 	})
 }
+
+func TestBindXed(t *testing.T) {
+	TestMergeHeader(t)
+	pkg := gengo.NewPackage("xed")
+	path := "xed.h"
+	mylog.Check(pkg.Transform("xed", &clang.Options{
+		Sources: []string{path},
+		// AdditionalParams: []string{},
+	}),
+	)
+	mylog.Check(pkg.WriteToDir("tmp"))
+}
+
+///////////////////////////////////
 
 const cmakeListName = "CMakeLists.txt"
 
