@@ -1,3 +1,15 @@
+
+typedef unsigned char      uint8_t;   // 无符号8位整数
+typedef unsigned short     uint16_t;  // 无符号16位整数
+typedef unsigned int       uint32_t;  // 无符号32位整数
+typedef unsigned long long uint64_t;  // 无符号64位整数
+typedef signed char        int8_t;    // 有符号8位整数
+typedef signed short       int16_t;   // 有符号16位整数
+typedef signed int         int32_t;   // 有符号32位整数
+typedef signed long long   int64_t;   // 有符号64位整数
+typedef int bool;           // 使用 typedef 定义 bool 类型
+
+typedef int* intptr_t;
 //xed-build-defines.h ------------------------------------------ ------------------------------------------
 /* BEGIN_LEGAL 
 
@@ -638,7 +650,7 @@ END_LEGAL */
 #define XED_OPERAND_WBNOINVD_DEFINED 1
 #define XED_OPERAND_ZEROING_DEFINED 1
 #define XED_OPERAND_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_operand_enum_t_ {
   XED_OPERAND_INVALID,
   XED_OPERAND_ABSBR,
   XED_OPERAND_AGEN,
@@ -1188,7 +1200,7 @@ END_LEGAL */
 #define XED_SYNTAX_ATT_DEFINED 1
 #define XED_SYNTAX_INTEL_DEFINED 1
 #define XED_SYNTAX_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_syntax_enum_t_ {
   XED_SYNTAX_INVALID,
   XED_SYNTAX_XED, ///< XED disassembly syntax
   XED_SYNTAX_ATT, ///< ATT SYSV disassembly syntax
@@ -1268,7 +1280,7 @@ END_LEGAL */
 #define XED_REG_CLASS_YMM_DEFINED 1
 #define XED_REG_CLASS_ZMM_DEFINED 1
 #define XED_REG_CLASS_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_reg_class_enum_t_ {
   XED_REG_CLASS_INVALID,
   XED_REG_CLASS_BNDCFG,
   XED_REG_CLASS_BNDSTAT,
@@ -1679,7 +1691,7 @@ END_LEGAL */
 # define XED_ENCODER_HL_H
 
 
-typedef struct {
+typedef struct xed_enc_displacement_t; /* fixme bad name */_ {
     xed_int64_t    displacement; 
     xed_uint32_t   displacement_bits;
 } xed_enc_displacement_t; /* fixme bad name */
@@ -1701,7 +1713,7 @@ xed_enc_displacement_t xed_disp(xed_int64_t   displacement,
 }
 //@}
 
-typedef struct {
+typedef struct xed_memop_t_ {
     xed_reg_enum_t seg;
     xed_reg_enum_t base;
     xed_reg_enum_t index;
@@ -1710,7 +1722,7 @@ typedef struct {
 } xed_memop_t;
 
 
-typedef enum {
+typedef enum xed_encoder_operand_type_t_ {
     XED_ENCODER_OPERAND_TYPE_INVALID,
     XED_ENCODER_OPERAND_TYPE_REL_BRDISP,
     XED_ENCODER_OPERAND_TYPE_ABS_BRDISP,
@@ -1731,7 +1743,7 @@ typedef enum {
     XED_ENCODER_OPERAND_TYPE_OTHER  
 } xed_encoder_operand_type_t;
 
-typedef struct {
+typedef struct s_ {
     xed_encoder_operand_type_t  type;
     union {
         xed_reg_enum_t reg;
@@ -2059,7 +2071,7 @@ typedef union {
 }  xed_encoder_prefixes_t;
 
 #define XED_ENCODER_OPERANDS_MAX 8 /* FIXME */
-typedef struct {
+typedef struct xed_encoder_instruction_t_ {
     xed_state_t mode;
     xed_iclass_enum_t iclass; /*FIXME: use iform instead? or allow either */
     xed_uint32_t effective_operand_width;
@@ -2429,7 +2441,7 @@ END_LEGAL */
 /// This structure is filled in by the various XED ENC2 functions. It
 /// should not be directly manipulated by user code.
 /// @ingroup ENC2
-typedef struct {
+typedef struct xed_enc2_req_payload_t_ {
     xed_uint8_t* itext;  // supplied by user during init
     xed_uint32_t cursor; // where we write next byte
 
@@ -6046,7 +6058,7 @@ END_LEGAL */
 #define XED_ICLASS_XSUSLDTRK_DEFINED 1
 #define XED_ICLASS_XTEST_DEFINED 1
 #define XED_ICLASS_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_iclass_enum_t_ {
   XED_ICLASS_INVALID,
   XED_ICLASS_AAA,
   XED_ICLASS_AAD,
@@ -8183,7 +8195,7 @@ END_LEGAL */
 #define XED_CATEGORY_XSAVE_DEFINED 1
 #define XED_CATEGORY_XSAVEOPT_DEFINED 1
 #define XED_CATEGORY_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_category_enum_t_ {
   XED_CATEGORY_INVALID,
   XED_CATEGORY_3DNOW,
   XED_CATEGORY_ADOX_ADCX,
@@ -8453,7 +8465,7 @@ END_LEGAL */
 #define XED_EXTENSION_XSAVEOPT_DEFINED 1
 #define XED_EXTENSION_XSAVES_DEFINED 1
 #define XED_EXTENSION_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_extension_enum_t_ {
   XED_EXTENSION_INVALID,
   XED_EXTENSION_3DNOW,
   XED_EXTENSION_3DNOW_PREFETCH,
@@ -8714,7 +8726,7 @@ END_LEGAL */
 #define XED_ATTRIBUTE_XMM_STATE_R_DEFINED 1
 #define XED_ATTRIBUTE_XMM_STATE_W_DEFINED 1
 #define XED_ATTRIBUTE_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_attribute_enum_t_ {
   XED_ATTRIBUTE_INVALID,
   XED_ATTRIBUTE_AMDONLY,
   XED_ATTRIBUTE_APX_NDD,
@@ -8954,7 +8966,7 @@ END_LEGAL */
 #define XED_EXCEPTION_USER_MSR_LEGACY_DEFINED 1
 #define XED_EXCEPTION_USER_MSR_VEX_DEFINED 1
 #define XED_EXCEPTION_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_exception_enum_t_ {
   XED_EXCEPTION_INVALID,
   XED_EXCEPTION_AMX_E1,
   XED_EXCEPTION_AMX_E10,
@@ -9105,7 +9117,7 @@ END_LEGAL */
 #define XED_OPERAND_ELEMENT_TYPE_INT8_DEFINED 1
 #define XED_OPERAND_ELEMENT_TYPE_UINT8_DEFINED 1
 #define XED_OPERAND_ELEMENT_TYPE_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_operand_element_type_enum_t_ {
   XED_OPERAND_ELEMENT_TYPE_INVALID,
   XED_OPERAND_ELEMENT_TYPE_UINT, ///< Unsigned integer
   XED_OPERAND_ELEMENT_TYPE_INT, ///< Signed integer
@@ -9205,7 +9217,7 @@ END_LEGAL */
 #define XED_OPERAND_XTYPE_UINT_DEFINED 1
 #define XED_OPERAND_XTYPE_VAR_DEFINED 1
 #define XED_OPERAND_XTYPE_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_operand_element_xtype_enum_t_ {
   XED_OPERAND_XTYPE_INVALID,
   XED_OPERAND_XTYPE_2BF16,
   XED_OPERAND_XTYPE_2BF8,
@@ -9348,7 +9360,7 @@ END_LEGAL */
 /// Options for the disasembly formatting functions. Set once during
 /// initialization by a calling #xed_format_set_options
 ///  @ingroup PRINT
-typedef struct {
+typedef struct xed_format_options_t_ {
     /// by default, XED prints the hex address before any symbolic name for
     /// branch targets. If set to zero, then XED will not print the hex
     /// address before a valid symbolic name.
@@ -18371,7 +18383,7 @@ END_LEGAL */
 #define XED_IFORM_XSUSLDTRK_DEFINED 1
 #define XED_IFORM_XTEST_DEFINED 1
 #define XED_IFORM_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_iform_enum_t_ {
   XED_IFORM_INVALID=0, 
   XED_IFORM_AAA=1, 
   XED_IFORM_AAD_IMMb=2, 
@@ -31306,7 +31318,7 @@ END_LEGAL */
 #define XED_IFORMFL_XTEST_FIRST_DEFINED 1
 #define XED_IFORMFL_XTEST_LAST_DEFINED 1
 #define XED_IFORMFL_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_iformfl_enum_t_ {
   XED_IFORMFL_AAA_FIRST=1, 
   XED_IFORMFL_AAA_LAST=1, 
   XED_IFORMFL_AAD_FIRST=2, 
@@ -35517,7 +35529,7 @@ END_LEGAL */
 
 /// @ingroup CPUID
 /// @brief a data structure representing a CPUID record
-typedef struct {
+typedef struct xed_cpuid_rec_t_ {
     xed_uint32_t leaf;      ///< cpuid leaf
     xed_uint32_t subleaf;   ///< cpuid subleaf
     xed_reg_enum_t reg;     ///< the register containing the bits (EAX,EBX,ECX,EDX)
@@ -35631,7 +35643,7 @@ END_LEGAL */
 #define XED_ADDRESS_WIDTH_32b_DEFINED 1
 #define XED_ADDRESS_WIDTH_64b_DEFINED 1
 #define XED_ADDRESS_WIDTH_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_address_width_enum_t_ {
   XED_ADDRESS_WIDTH_INVALID=0,
   XED_ADDRESS_WIDTH_16b=2, ///< 16b addressing
   XED_ADDRESS_WIDTH_32b=4, ///< 32b addressing
@@ -35679,7 +35691,7 @@ END_LEGAL */
 #if !defined(XED_ATTRIBUTES_H)
 # define XED_ATTRIBUTES_H
 
-typedef struct {
+typedef struct xed_attributes_t_ {
     xed_uint64_t a1;
     xed_uint64_t a2;
 } xed_attributes_t;
@@ -35787,7 +35799,7 @@ END_LEGAL */
 #define XED_CHIP_FUTURE_DEFINED 1
 #define XED_CHIP_ALL_DEFINED 1
 #define XED_CHIP_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_chip_enum_t_ {
   XED_CHIP_INVALID,
   XED_CHIP_I86,
   XED_CHIP_I86FP,
@@ -35908,8 +35920,8 @@ END_LEGAL */
 
 #define XED_FEATURE_VECTOR_MAX 7
 /// @ingroup ISASET
-typedef struct 
-{
+typedef struct xed_chip_features_t_ {
+
     xed_uint64_t f[XED_FEATURE_VECTOR_MAX];
 } xed_chip_features_t;
 
@@ -36003,7 +36015,7 @@ END_LEGAL */
 
 #if !defined(XED_CONVERT_TABLE_INIT_H)
 # define XED_CONVERT_TABLE_INIT_H
-typedef struct {
+typedef struct xed_convert_table_t_ {
 
    const char** table_name;
 
@@ -36359,7 +36371,7 @@ END_LEGAL */
 #define XED_CPUID_GROUP_XSAVEOPT_DEFINED 1
 #define XED_CPUID_GROUP_XSAVES_DEFINED 1
 #define XED_CPUID_GROUP_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_cpuid_group_enum_t_ {
   XED_CPUID_GROUP_INVALID,
   XED_CPUID_GROUP_ADOX_ADCX,
   XED_CPUID_GROUP_AES,
@@ -36868,7 +36880,7 @@ END_LEGAL */
 #define XED_CPUID_REC_XSAVEOPT_DEFINED 1
 #define XED_CPUID_REC_XSAVES_DEFINED 1
 #define XED_CPUID_REC_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_cpuid_rec_enum_t_ {
   XED_CPUID_REC_INVALID,
   XED_CPUID_REC_ADOXADCX,
   XED_CPUID_REC_AES,
@@ -37200,7 +37212,7 @@ END_LEGAL */
 #define XED_ERROR_BAD_EVEX_LL_DEFINED 1
 #define XED_ERROR_BAD_REG_MATCH_DEFINED 1
 #define XED_ERROR_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_error_enum_t_ {
   XED_ERROR_NONE, ///< There was no error
   XED_ERROR_BUFFER_TOO_SHORT, ///< There were not enough bytes in the given buffer
   XED_ERROR_GENERAL_ERROR, ///< XED could not decode the given instruction
@@ -37277,7 +37289,7 @@ END_LEGAL */
 #define XED_FLAG_ACTION_ah_DEFINED 1
 #define XED_FLAG_ACTION_1_DEFINED 1
 #define XED_FLAG_ACTION_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_flag_action_enum_t_ {
   XED_FLAG_ACTION_INVALID,
   XED_FLAG_ACTION_u, ///< undefined (treated as a write)
   XED_FLAG_ACTION_tst, ///< test (read)
@@ -37355,7 +37367,7 @@ END_LEGAL */
 #define XED_FLAG_fc2_DEFINED 1
 #define XED_FLAG_fc3_DEFINED 1
 #define XED_FLAG_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_flag_enum_t_ {
   XED_FLAG_INVALID,
   XED_FLAG_of, ///<< overflow flag
   XED_FLAG_sf, ///< sign flag
@@ -37815,7 +37827,7 @@ END_LEGAL */
 #define XED_ILD_VEX_MAP7_DEFINED 1
 #define XED_ILD_MAP_INVALID_DEFINED 1
 #define XED_ILD_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_ild_map_enum_t_ {
   XED_ILD_AMD_3DNOW=4,
   XED_ILD_AMD_XOP8=8,
   XED_ILD_AMD_XOP9=9,
@@ -38494,7 +38506,7 @@ END_LEGAL */
 #define XED_ISA_SET_XSAVEOPT_DEFINED 1
 #define XED_ISA_SET_XSAVES_DEFINED 1
 #define XED_ISA_SET_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_isa_set_enum_t_ {
   XED_ISA_SET_INVALID,
   XED_ISA_SET_3DNOW,
   XED_ISA_SET_ADOX_ADCX,
@@ -38831,7 +38843,7 @@ END_LEGAL */
 #define XED_MACHINE_MODE_REAL_16_DEFINED 1
 #define XED_MACHINE_MODE_REAL_32_DEFINED 1
 #define XED_MACHINE_MODE_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_machine_mode_enum_t_ {
   XED_MACHINE_MODE_INVALID,
   XED_MACHINE_MODE_LONG_64, ///< 64b operating mode
   XED_MACHINE_MODE_LONG_COMPAT_32, ///< 32b protected mode
@@ -38908,7 +38920,7 @@ END_LEGAL */
 #define XED_MAPU_VEX_MAP5_DEFINED 1
 #define XED_MAPU_VEX_MAP7_DEFINED 1
 #define XED_MAPU_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_mapu_enum_t_ {
   XED_MAPU_INVALID,
   XED_MAPU_AMD_3DNOW,
   XED_MAPU_AMD_XOP8,
@@ -39250,7 +39262,7 @@ END_LEGAL */
 #define XED_NONTERMINAL_ZMM_R3_32_DEFINED 1
 #define XED_NONTERMINAL_ZMM_R3_64_DEFINED 1
 #define XED_NONTERMINAL_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_nonterminal_enum_t_ {
   XED_NONTERMINAL_INVALID,
   XED_NONTERMINAL_AR10,
   XED_NONTERMINAL_AR11,
@@ -41291,7 +41303,7 @@ END_LEGAL */
 #define XED_OPERAND_ACTION_CRW_DEFINED 1
 #define XED_OPERAND_ACTION_CR_DEFINED 1
 #define XED_OPERAND_ACTION_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_operand_action_enum_t_ {
   XED_OPERAND_ACTION_INVALID,
   XED_OPERAND_ACTION_RW, ///< Read and written (must write)
   XED_OPERAND_ACTION_R, ///< Read-only
@@ -41368,7 +41380,7 @@ END_LEGAL */
 #define XED_OPERAND_CONVERT_MULTIREG15_DEFINED 1
 #define XED_OPERAND_CONVERT_MULTIREG16_DEFINED 1
 #define XED_OPERAND_CONVERT_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_operand_convert_enum_t_ {
   XED_OPERAND_CONVERT_INVALID,
   XED_OPERAND_CONVERT_ZEROSTR,
   XED_OPERAND_CONVERT_SAESTR,
@@ -41447,7 +41459,7 @@ END_LEGAL */
 #define XED_OPERAND_CTYPE_XED_UINT64_T_DEFINED 1
 #define XED_OPERAND_CTYPE_XED_UINT8_T_DEFINED 1
 #define XED_OPERAND_CTYPE_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_operand_ctype_enum_t_ {
   XED_OPERAND_CTYPE_INVALID,
   XED_OPERAND_CTYPE_XED_BITS_T,
   XED_OPERAND_CTYPE_XED_CHIP_ENUM_T,
@@ -41713,7 +41725,7 @@ END_LEGAL */
 #define XED_OPERAND_TYPE_NT_LOOKUP_FN4_DEFINED 1
 #define XED_OPERAND_TYPE_REG_DEFINED 1
 #define XED_OPERAND_TYPE_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_operand_type_enum_t_ {
   XED_OPERAND_TYPE_INVALID,
   XED_OPERAND_TYPE_ERROR,
   XED_OPERAND_TYPE_IMM,
@@ -42300,7 +42312,7 @@ END_LEGAL */
 #define XED_OPVIS_IMPLICIT_DEFINED 1
 #define XED_OPVIS_SUPPRESSED_DEFINED 1
 #define XED_OPVIS_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_operand_visibility_enum_t_ {
   XED_OPVIS_INVALID,
   XED_OPVIS_EXPLICIT, ///< Shows up in operand encoding
   XED_OPVIS_IMPLICIT, ///< Part of the opcode, but listed as an operand
@@ -42488,7 +42500,7 @@ END_LEGAL */
 #define XED_OPERAND_WIDTH_Z4I8_DEFINED 1
 #define XED_OPERAND_WIDTH_Z2I8_DEFINED 1
 #define XED_OPERAND_WIDTH_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_operand_width_enum_t_ {
   XED_OPERAND_WIDTH_INVALID,
   XED_OPERAND_WIDTH_ASZ,
   XED_OPERAND_WIDTH_SSZ,
@@ -42673,7 +42685,7 @@ END_LEGAL */
 /// This contains the information used by the various disassembly printers.
 /// Call xed_init_print_info to initialize the fields.  Then change the
 /// required and optional fields when required.
-typedef struct {
+typedef struct xed_print_info_t_ {
 
     /////////////////////////////////////////
     // REQUIRED FIELDS - users should set these
@@ -43192,7 +43204,7 @@ END_LEGAL */
 #define XED_REG_YMM_LAST_DEFINED 1
 #define XED_REG_ZMM_FIRST_DEFINED 1
 #define XED_REG_ZMM_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_reg_enum_t_ {
   XED_REG_INVALID,
   XED_REG_BNDCFGU,
   XED_REG_BNDSTATUS,
@@ -43668,7 +43680,7 @@ END_LEGAL */
 #define XED_REG_ROLE_BASE1_DEFINED 1
 #define XED_REG_ROLE_INDEX_DEFINED 1
 #define XED_REG_ROLE_LAST_DEFINED 1
-typedef enum {
+typedef enum xed_reg_role_enum_t_ {
   XED_REG_ROLE_INVALID,
   XED_REG_ROLE_NORMAL, ///< Register is a normal register
   XED_REG_ROLE_SEGREG0, ///< The segment register associated with the first memop
@@ -43696,4 +43708,5 @@ XED_DLL_EXPORT const char* xed_reg_role_enum_t2str(const xed_reg_role_enum_t p);
 XED_DLL_EXPORT xed_reg_role_enum_t xed_reg_role_enum_t_last(void);
 #endif
 //--------------------------------------------------------------------------------------------------------
+
 

@@ -19,6 +19,9 @@ func TestMergeHeader(t *testing.T) {
 	debugIndex := 0
 
 	isIncludeLine := func(s string) bool {
+		//xed-get-time.h   todo bug
+		//#   include "xed-portability.h"
+		//#   include "xed-types.h"
 		return strings.HasPrefix(s, "#include") || strings.HasPrefix(s, "# include")
 	}
 	includePath := "kits/xed-install-base-2024-11-27-win-x86-64/include/xed"
