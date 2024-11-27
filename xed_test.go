@@ -61,6 +61,7 @@ func TestMergeHeader(t *testing.T) {
 		names.Set(name, lastIndex)
 	}
 	b := stream.NewBuffer("")
+	b.WriteStringLn("#define XED_WINDOWS")
 	sep := "------------------------------------------"
 	for _, p := range names.List() {
 		mylog.Success(p.Key, p.Value)
@@ -81,12 +82,11 @@ func TestMergeHeader(t *testing.T) {
 		b.NewLine()
 	}
 	stream.WriteTruncate("xed_merged.h", b.Bytes())
+	clang.CheckHeadFile("xed_merged.h")
 }
 
 func TestBindXed(t *testing.T) {
 	path := "xed_merged.h"
-	clang.CheckHeadFile(path)
-	return
 	TestMergeHeader(t)
 	pkg := gengo.NewPackage("xed")
 	mylog.Check(pkg.Transform("xed", &clang.Options{
