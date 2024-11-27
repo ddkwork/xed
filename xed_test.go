@@ -84,7 +84,7 @@ func TestMergeHeader(t *testing.T) {
 func TestBindXed(t *testing.T) {
 	TestMergeHeader(t)
 	pkg := gengo.NewPackage("xed")
-	path := "xed.h"
+	path := "xed_merged.h"
 	mylog.Check(pkg.Transform("xed", &clang.Options{
 		Sources: []string{path},
 		// AdditionalParams: []string{},
