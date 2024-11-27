@@ -33,7 +33,6 @@ func TestMakeExampleCmakePackages(t *testing.T) {
 		if filepath.Ext(path) != ".c" {
 			return err
 		}
-		mylog.Success(filepath.Base(path), path)
 		projects = append(projects, examples{
 			cFilePath:  path,
 			name:       stream.ToCamelToLower(stream.BaseName(path), false),
@@ -43,6 +42,8 @@ func TestMakeExampleCmakePackages(t *testing.T) {
 	})
 
 	for _, project := range projects {
+		project.name = strings.TrimPrefix(project.name, "xed")
+		mylog.Success(project.name, project.cFilePath)
 		g := stream.NewGeneratedFile()
 		g.P(`
 cmake_minimum_required(VERSION 3.30)
