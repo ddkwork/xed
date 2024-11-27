@@ -13,14 +13,6 @@ add_executable(asmparse
 target_link_libraries(asmparse xed)
 
 
-
-
-
-
-
-
-
-
 # 设置编译选项
 #option(USE_ENCODER "Enable encoder" ON)
 #option(USE_DECODER "Enable decoder" ON)
