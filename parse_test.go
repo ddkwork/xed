@@ -40,7 +40,7 @@ func TestMakeExampleCmakePackages(t *testing.T) {
 		})
 		return err
 	})
-	subNames := make([]string, 0)
+	subNames := map[string]string{}
 	for _, project := range projects {
 		switch project.name {
 		case "xed", "Xed":
@@ -51,7 +51,7 @@ func TestMakeExampleCmakePackages(t *testing.T) {
 		}
 		project.name = strings.ReplaceAll(project.name, "Asmparse", "AsmParse")
 		mylog.Success(project.name, project.cFilePath)
-		subNames = append(subNames, project.name)
+		subNames[project.name] = ""
 		g := stream.NewGeneratedFile()
 		g.P(`
 cmake_minimum_required(VERSION 3.30)
@@ -81,14 +81,16 @@ set(CMAKE_C_STANDARD 11)
 
 	gXedUintTest := stream.NewGeneratedFile()
 	gSub := stream.NewGeneratedFile()
+	gXedUintTest.P("package xed")
+	gXedUintTest.P("import \"testing\"")
 	gSub.P("add_subdirectory(")
-	for _, name := range subNames {
+	for name := range subNames {
 		gSub.P(name)
 		gXedUintTest.P("func Test", name, "(t *testing.T) {}")
 	}
 	gSub.P(")")
 	stream.WriteTruncate("kits/xed-install-base-2024-11-27-win-x86-64/examples/examples/CMakeLists.txt", gSub.Bytes())
-	println(gXedUintTest.String())
+	stream.WriteGoFile("xed_test.go", gXedUintTest.Bytes())
 	// 复制 parse 测试命令   生成go单元测试签名
 }
 
