@@ -6,10 +6,20 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ddkwork/golibrary/stream"
-
 	"github.com/ddkwork/golibrary/mylog"
+	"github.com/ddkwork/golibrary/stream"
 )
+
+func TestBindGen(t *testing.T) {
+	// merge header files
+	filepath.Walk("kits/xed-install-base-2024-11-27-win-x86-64/include/xed", func(path string, info fs.FileInfo, err error) error {
+		if info.IsDir() {
+			return nil
+		}
+		println(path)
+		return err
+	})
+}
 
 const cmakeListName = "CMakeLists.txt"
 
