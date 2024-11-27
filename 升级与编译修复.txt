@@ -1,0 +1,7 @@
+遇到编译错误是需要转gbk编码
+apply_legal_header.py
+xed-ild.c
+
+set toolchain=cl
+python mfile.py clean examples --shared  install --limit-strings
+pause
