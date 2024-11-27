@@ -40,7 +40,6 @@ func TestMakeExampleCmakePackages(t *testing.T) {
 		})
 		return err
 	})
-	projectRoot := "D:\\workspace\\workspace\\debuger\\xed\\kits\\xed-install-base-2024-11-27-win-x86-64\\examples"
 	subNames := make([]string, 0)
 	for _, project := range projects {
 		switch project.name {
@@ -70,7 +69,7 @@ set(CMAKE_C_STANDARD 11)
 		g.P("add_executable(", project.name, '"', ")")
 
 		g.P("target_link_libraries(", project.name, " xed)")
-
+		projectRoot := "D:\\workspace\\workspace\\debuger\\xed\\kits\\xed-install-base-2024-11-27-win-x86-64\\examples"
 		projectRoot = filepath.Join(projectRoot, "examples", project.name)
 		stream.WriteTruncate(filepath.Join(projectRoot, cmakeListName), g.Bytes())
 		stream.WriteTruncate(filepath.Join(projectRoot, filepath.Base(project.cFilePath)), stream.NewBuffer(project.cFilePath))
