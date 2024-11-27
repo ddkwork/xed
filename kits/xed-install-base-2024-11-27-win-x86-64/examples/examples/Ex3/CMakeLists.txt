@@ -4,5 +4,9 @@ project(Ex3 C)
 
 include_directories(../../include)
 link_directories(${CMAKE_SOURCE_DIR})
+add_executable(
+xed-ex3.c
+xed-examples-util.c
+)
 add_executable(Ex334)
 target_link_libraries(Ex3 xed)

@@ -4,5 +4,9 @@ project(NmSymtab C)
 
 include_directories(../../include)
 link_directories(${CMAKE_SOURCE_DIR})
+add_executable(
+xed-nm-symtab.c
+xed-examples-util.c
+)
 add_executable(NmSymtab34)
 target_link_libraries(NmSymtab xed)

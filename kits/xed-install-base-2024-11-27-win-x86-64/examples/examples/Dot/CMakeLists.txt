@@ -4,5 +4,9 @@ project(Dot C)
 
 include_directories(../../include)
 link_directories(${CMAKE_SOURCE_DIR})
+add_executable(
+xed-dot.c
+xed-examples-util.c
+)
 add_executable(Dot34)
 target_link_libraries(Dot xed)

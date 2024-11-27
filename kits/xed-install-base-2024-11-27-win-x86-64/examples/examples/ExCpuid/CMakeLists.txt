@@ -4,5 +4,9 @@ project(ExCpuid C)
 
 include_directories(../../include)
 link_directories(${CMAKE_SOURCE_DIR})
+add_executable(
+xed-ex-cpuid.c
+xed-examples-util.c
+)
 add_executable(ExCpuid34)
 target_link_libraries(ExCpuid xed)

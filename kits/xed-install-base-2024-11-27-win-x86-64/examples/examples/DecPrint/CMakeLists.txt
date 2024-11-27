@@ -4,5 +4,9 @@ project(DecPrint C)
 
 include_directories(../../include)
 link_directories(${CMAKE_SOURCE_DIR})
+add_executable(
+xed-dec-print.c
+xed-examples-util.c
+)
 add_executable(DecPrint34)
 target_link_libraries(DecPrint xed)

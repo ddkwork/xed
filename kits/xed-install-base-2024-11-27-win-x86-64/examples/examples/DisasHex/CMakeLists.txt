@@ -4,5 +4,9 @@ project(DisasHex C)
 
 include_directories(../../include)
 link_directories(${CMAKE_SOURCE_DIR})
+add_executable(
+xed-disas-hex.c
+xed-examples-util.c
+)
 add_executable(DisasHex34)
 target_link_libraries(DisasHex xed)

@@ -4,5 +4,9 @@ project(DisasElf C)
 
 include_directories(../../include)
 link_directories(${CMAKE_SOURCE_DIR})
+add_executable(
+xed-disas-elf.c
+xed-examples-util.c
+)
 add_executable(DisasElf34)
 target_link_libraries(DisasElf xed)

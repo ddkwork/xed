@@ -4,5 +4,9 @@ project(Enc22 C)
 
 include_directories(../../include)
 link_directories(${CMAKE_SOURCE_DIR})
+add_executable(
+xed-enc2-2.c
+xed-examples-util.c
+)
 add_executable(Enc2234)
 target_link_libraries(Enc22 xed)

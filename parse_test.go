@@ -35,14 +35,20 @@ func TestMakeExampleCmakePackages(t *testing.T) {
 		}
 		projects = append(projects, examples{
 			cFilePath:  path,
-			name:       stream.ToCamelToLower(stream.BaseName(path), false),
+			name:       stream.ToCamelUpper(stream.BaseName(path), false),
 			cmakeLists: "",
 		})
 		return err
 	})
 
 	for _, project := range projects {
-		project.name = strings.TrimPrefix(project.name, "xed")
+		switch project.name {
+		case "xed", "Xed":
+		default:
+			project.name = strings.TrimPrefix(project.name, "xed")
+			project.name = strings.TrimPrefix(project.name, "Xed")
+		}
+		project.name = strings.ReplaceAll(project.name, "Asmparse", "AsmParse")
 		mylog.Success(project.name, project.cFilePath)
 		g := stream.NewGeneratedFile()
 		g.P(`
@@ -54,13 +60,20 @@ set(CMAKE_C_STANDARD 11)
 
 		g.P("include_directories(../../include)")
 		g.P("link_directories(${CMAKE_SOURCE_DIR})")
+
+		g.P("add_executable(")
+		g.P(filepath.Base(project.cFilePath))
+		g.P("xed-examples-util.c")
+		g.P(")")
 		g.P("add_executable(", project.name, '"', ")")
+
 		g.P("target_link_libraries(", project.name, " xed)")
 
 		projectRoot := "D:\\workspace\\workspace\\debuger\\xed\\kits\\xed-install-base-2024-11-27-win-x86-64\\examples"
 		projectRoot = filepath.Join(projectRoot, "examples", project.name)
 		stream.WriteTruncate(filepath.Join(projectRoot, cmakeListName), g.Bytes())
 		stream.WriteTruncate(filepath.Join(projectRoot, filepath.Base(project.cFilePath)), stream.NewBuffer(project.cFilePath))
+		stream.WriteTruncate(filepath.Join(projectRoot, "xed-examples-util.c"), stream.NewBuffer("kits/xed-install-base-2024-11-27-win-x86-64/examples/xed-examples-util.c"))
 		stream.WriteTruncate(filepath.Join(projectRoot, "xed.lib"), stream.NewBuffer("kits/xed-install-base-2024-11-27-win-x86-64/lib/xed.lib"))
 		stream.WriteTruncate(filepath.Join(projectRoot, "xed-ild.lib"), stream.NewBuffer("kits/xed-install-base-2024-11-27-win-x86-64/lib/xed-ild.lib"))
 	}
