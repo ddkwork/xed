@@ -18,15 +18,19 @@ func TestMergeHeader(t *testing.T) {
 	names := stream.NewOrderedMap("", 0)
 	debugIndex := 0
 
+	isIncludeLine := func(s string) bool {
+		return strings.HasPrefix(s, "#include") || strings.HasPrefix(s, "# include")
+	}
+	includePath := "kits/xed-install-base-2024-11-27-win-x86-64/include/xed"
 	var allNames []string
-	filepath.Walk("kits/xed-install-base-2024-11-27-win-x86-64/include/xed", func(path string, info fs.FileInfo, err error) error {
+	filepath.Walk(includePath, func(path string, info fs.FileInfo, err error) error {
 		if info.IsDir() {
 			return nil
 		}
 		if filepath.Base(path) == "xed-interface.h" {
 			index := 0
 			for _, s := range stream.ToLines(path) {
-				if strings.HasPrefix(s, "#include") || strings.HasPrefix(s, "# include") {
+				if isIncludeLine(s) {
 					index++
 					s = strings.TrimPrefix(s, "#include")
 					s = strings.TrimPrefix(s, "# include")
@@ -50,7 +54,6 @@ func TestMergeHeader(t *testing.T) {
 	//for _, p := range names.List() {
 	//	mylog.Success(p.Key, p.Value)
 	//}
-
 	last := names.Last()
 	lastIndex := last.Value
 
@@ -61,9 +64,21 @@ func TestMergeHeader(t *testing.T) {
 		lastIndex++
 		names.Set(name, lastIndex)
 	}
+	b := stream.NewBuffer("")
 	for _, p := range names.List() {
 		mylog.Success(p.Key, p.Value)
+		b.WriteStringLn("//" + p.Key + " ------------------------------------------ ------------------------------------------")
+		// b.NewLine()
+		for _, s := range stream.ToLines(filepath.Join(includePath, p.Key)) {
+			if isIncludeLine(s) {
+				continue
+			}
+			b.WriteStringLn(s)
+		}
+		b.WriteStringLn("//--------------------------------------------------------------------------------------------------------")
+		b.NewLine()
 	}
+	stream.WriteTruncate("xed_merged.h", b.Bytes())
 }
 
 func TestBindXed(t *testing.T) {
