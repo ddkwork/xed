@@ -12,30 +12,6 @@ import (
 	"github.com/ddkwork/golibrary/stream"
 )
 
-func TestMergeHeader(t *testing.T) {
-	filepath.Walk("kits/xed-install-base-2024-11-27-win-x86-64/include/xed", func(path string, info fs.FileInfo, err error) error {
-		if info.IsDir() {
-			return nil
-		}
-		println(path)
-		return err
-	})
-}
-
-func TestBindXed(t *testing.T) {
-	TestMergeHeader(t)
-	pkg := gengo.NewPackage("xed")
-	path := "xed.h"
-	mylog.Check(pkg.Transform("xed", &clang.Options{
-		Sources: []string{path},
-		// AdditionalParams: []string{},
-	}),
-	)
-	mylog.Check(pkg.WriteToDir("tmp"))
-}
-
-///////////////////////////////////
-
 const cmakeListName = "CMakeLists.txt"
 
 type (
@@ -47,6 +23,7 @@ type (
 )
 
 func TestMakeExampleCmakePackages(t *testing.T) {
+	t.Skip()
 	projects := make([]examples, 0)
 	filepath.Walk("kits", func(path string, info fs.FileInfo, err error) error {
 		if info.IsDir() {
@@ -115,8 +92,7 @@ set(CMAKE_C_STANDARD 11)
 	}
 	gSub.P(")")
 	stream.WriteTruncate("kits/xed-install-base-2024-11-27-win-x86-64/examples/examples/CMakeLists.txt", gSub.Bytes())
-	stream.WriteGoFile("xed_test.go", gXedUintTest.Bytes())
-	// 复制 parse 测试命令   生成go单元测试签名
+	//stream.WriteGoFile("xed_test.go", gXedUintTest.Bytes())
 }
 
 const parseTest = `

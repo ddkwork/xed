@@ -1,6 +1,35 @@
 package xed
 
-import "testing"
+import (
+	"github.com/ddkwork/app/bindgen/clang"
+	"github.com/ddkwork/app/bindgen/gengo"
+	"github.com/ddkwork/golibrary/mylog"
+	"io/fs"
+	"path/filepath"
+	"testing"
+)
+
+func TestMergeHeader(t *testing.T) {
+	filepath.Walk("kits/xed-install-base-2024-11-27-win-x86-64/include/xed", func(path string, info fs.FileInfo, err error) error {
+		if info.IsDir() {
+			return nil
+		}
+		println(path)
+		return err
+	})
+}
+
+func TestBindXed(t *testing.T) {
+	TestMergeHeader(t)
+	pkg := gengo.NewPackage("xed")
+	path := "xed.h"
+	mylog.Check(pkg.Transform("xed", &clang.Options{
+		Sources: []string{path},
+		// AdditionalParams: []string{},
+	}),
+	)
+	mylog.Check(pkg.WriteToDir("tmp"))
+}
 
 func TestDisasMacho(t *testing.T)   {}
 func TestEx1(t *testing.T)          {}
