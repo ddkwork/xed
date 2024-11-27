@@ -1,16 +1,4 @@
-
-typedef unsigned char      uint8_t;   // 无符号8位整数
-typedef unsigned short     uint16_t;  // 无符号16位整数
-typedef unsigned int       uint32_t;  // 无符号32位整数
-typedef unsigned long long uint64_t;  // 无符号64位整数
-typedef signed char        int8_t;    // 有符号8位整数
-typedef signed short       int16_t;   // 有符号16位整数
-typedef signed int         int32_t;   // 有符号32位整数
-typedef signed long long   int64_t;   // 有符号64位整数
-typedef int bool;           // 使用 typedef 定义 bool 类型
-
-typedef int* intptr_t;
-//xed-build-defines.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-build-defines.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -74,9 +62,9 @@ END_LEGAL */
 #    define XED_VIA_ENABLED
 #  endif
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-build-defines.h------------------------------------------
 
-//xed-portability.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-portability.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -274,9 +262,9 @@ XED_DLL_EXPORT int xed_strncat(char* dst, const char* src,  int len);
 
 #endif  // XED_PORTABILITY_H
 
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-portability.h------------------------------------------
 
-//xed-common-hdrs.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-common-hdrs.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -348,9 +336,9 @@ END_LEGAL */
     
 #endif
 
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-common-hdrs.h------------------------------------------
 
-//xed-types.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-types.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -379,7 +367,6 @@ END_LEGAL */
 
 
 #if defined(__GNUC__) || defined(__ICC) || defined(__clang__)
-#  include <stdint.h>
 #  define xed_uint8_t   uint8_t 
 #  define xed_uint16_t  uint16_t
 #  define xed_uint32_t  uint32_t
@@ -481,9 +468,9 @@ typedef union {
 
 ////////////////////////////////////////////////////////////////////////////
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-types.h------------------------------------------
 
-//xed-operand-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-operand-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -650,7 +637,7 @@ END_LEGAL */
 #define XED_OPERAND_WBNOINVD_DEFINED 1
 #define XED_OPERAND_ZEROING_DEFINED 1
 #define XED_OPERAND_LAST_DEFINED 1
-typedef enum xed_operand_enum_t_ {
+typedef enum {
   XED_OPERAND_INVALID,
   XED_OPERAND_ABSBR,
   XED_OPERAND_AGEN,
@@ -811,9 +798,9 @@ XED_DLL_EXPORT const char* xed_operand_enum_t2str(const xed_operand_enum_t p);
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_operand_enum_t xed_operand_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-operand-enum.h------------------------------------------
 
-//xed-init.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-init.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -849,9 +836,9 @@ XED_DLL_EXPORT void xed_tables_init(void);
 ////////////////////////////////////////////////////////////////////////////
 
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-init.h------------------------------------------
 
-//xed-decode.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-decode.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -918,9 +905,9 @@ xed_decode_with_features(xed_decoded_inst_t* xedd,
 
 #endif
 
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-decode.h------------------------------------------
 
-//xed-ild.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-ild.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -976,9 +963,9 @@ xed_ild_decode(xed_decoded_inst_t* xedd,
 
 #endif
 
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-ild.h------------------------------------------
 
-//xed-state.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-state.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -1168,9 +1155,9 @@ XED_DLL_EXPORT int xed_state_print(const xed_state_t* p, char* buf, int buflen);
 
 #endif
 
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-state.h------------------------------------------
 
-//xed-syntax-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-syntax-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -1200,7 +1187,7 @@ END_LEGAL */
 #define XED_SYNTAX_ATT_DEFINED 1
 #define XED_SYNTAX_INTEL_DEFINED 1
 #define XED_SYNTAX_LAST_DEFINED 1
-typedef enum xed_syntax_enum_t_ {
+typedef enum {
   XED_SYNTAX_INVALID,
   XED_SYNTAX_XED, ///< XED disassembly syntax
   XED_SYNTAX_ATT, ///< ATT SYSV disassembly syntax
@@ -1224,9 +1211,9 @@ XED_DLL_EXPORT const char* xed_syntax_enum_t2str(const xed_syntax_enum_t p);
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_syntax_enum_t xed_syntax_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-syntax-enum.h------------------------------------------
 
-//xed-reg-class-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-reg-class-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -1280,7 +1267,7 @@ END_LEGAL */
 #define XED_REG_CLASS_YMM_DEFINED 1
 #define XED_REG_CLASS_ZMM_DEFINED 1
 #define XED_REG_CLASS_LAST_DEFINED 1
-typedef enum xed_reg_class_enum_t_ {
+typedef enum {
   XED_REG_CLASS_INVALID,
   XED_REG_CLASS_BNDCFG,
   XED_REG_CLASS_BNDSTAT,
@@ -1328,9 +1315,9 @@ XED_DLL_EXPORT const char* xed_reg_class_enum_t2str(const xed_reg_class_enum_t p
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_reg_class_enum_t xed_reg_class_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-reg-class-enum.h------------------------------------------
 
-//xed-reg-class.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-reg-class.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -1390,9 +1377,9 @@ xed_get_register_width_bits64(xed_reg_enum_t r);
 ////////////////////////////////////////////////////////////////////////////
 
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-reg-class.h------------------------------------------
 
-//xed-encode.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-encode.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -1666,9 +1653,9 @@ xed_encode_nop(xed_uint8_t* array,
 //@}
 
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-encode.h------------------------------------------
 
-//xed-encoder-hl.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-encoder-hl.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -1691,7 +1678,7 @@ END_LEGAL */
 # define XED_ENCODER_HL_H
 
 
-typedef struct xed_enc_displacement_t; /* fixme bad name */_ {
+typedef struct {
     xed_int64_t    displacement; 
     xed_uint32_t   displacement_bits;
 } xed_enc_displacement_t; /* fixme bad name */
@@ -1713,7 +1700,7 @@ xed_enc_displacement_t xed_disp(xed_int64_t   displacement,
 }
 //@}
 
-typedef struct xed_memop_t_ {
+typedef struct {
     xed_reg_enum_t seg;
     xed_reg_enum_t base;
     xed_reg_enum_t index;
@@ -1722,7 +1709,7 @@ typedef struct xed_memop_t_ {
 } xed_memop_t;
 
 
-typedef enum xed_encoder_operand_type_t_ {
+typedef enum {
     XED_ENCODER_OPERAND_TYPE_INVALID,
     XED_ENCODER_OPERAND_TYPE_REL_BRDISP,
     XED_ENCODER_OPERAND_TYPE_ABS_BRDISP,
@@ -1743,7 +1730,7 @@ typedef enum xed_encoder_operand_type_t_ {
     XED_ENCODER_OPERAND_TYPE_OTHER  
 } xed_encoder_operand_type_t;
 
-typedef struct s_ {
+typedef struct {
     xed_encoder_operand_type_t  type;
     union {
         xed_reg_enum_t reg;
@@ -2071,7 +2058,7 @@ typedef union {
 }  xed_encoder_prefixes_t;
 
 #define XED_ENCODER_OPERANDS_MAX 8 /* FIXME */
-typedef struct xed_encoder_instruction_t_ {
+typedef struct {
     xed_state_t mode;
     xed_iclass_enum_t iclass; /*FIXME: use iform instead? or allow either */
     xed_uint32_t effective_operand_width;
@@ -2348,9 +2335,9 @@ static XED_INLINE  void xed_inst(
  */
 
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-encoder-hl.h------------------------------------------
 
-//xed-patch.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-patch.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -2413,9 +2400,9 @@ xed_patch_imm0(xed_decoded_inst_t* xedd,
 
 //@}
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-patch.h------------------------------------------
 
-//xed-encode-direct.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-encode-direct.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -2441,7 +2428,7 @@ END_LEGAL */
 /// This structure is filled in by the various XED ENC2 functions. It
 /// should not be directly manipulated by user code.
 /// @ingroup ENC2
-typedef struct xed_enc2_req_payload_t_ {
+typedef struct {
     xed_uint8_t* itext;  // supplied by user during init
     xed_uint32_t cursor; // where we write next byte
 
@@ -2532,9 +2519,9 @@ XED_DLL_EXPORT void xed_enc2_set_error_handler(xed_user_abort_handler_t* fn);
 XED_DLL_EXPORT void xed_enc2_error(const char* fmt, ...);
 
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-encode-direct.h------------------------------------------
 
-//xed-encode-check.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-encode-check.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -2564,9 +2551,9 @@ END_LEGAL */
 XED_DLL_EXPORT void xed_enc2_set_check_args(xed_bool_t on);
 
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-encode-check.h------------------------------------------
 
-//xed-util.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-util.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -2830,9 +2817,9 @@ XED_DLL_EXPORT xed_uint_t xed_shortest_width_unsigned(xed_uint64_t x, xed_uint8_
 XED_DLL_EXPORT xed_uint_t xed_shortest_width_signed(xed_int64_t x, xed_uint8_t legal_widths);
 
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-util.h------------------------------------------
 
-//xed-operand-action.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-operand-action.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -2867,9 +2854,9 @@ XED_DLL_EXPORT xed_uint_t xed_operand_action_conditional_write(const xed_operand
 
 #endif
 
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-operand-action.h------------------------------------------
 
-//xed-version.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-version.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -2898,9 +2885,9 @@ XED_DLL_EXPORT char const* xed_get_version(void);
 /// Returns a copyright string.
 XED_DLL_EXPORT char const* xed_get_copyright(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-version.h------------------------------------------
 
-//xed-decoded-inst.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-decoded-inst.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -2988,9 +2975,9 @@ typedef xed_decoded_inst_t xed_operand_values_t;
 
 #endif
 
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-decoded-inst.h------------------------------------------
 
-//xed-decoded-inst-api.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-decoded-inst-api.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -3703,9 +3690,9 @@ xed_classify_sse(const xed_decoded_inst_t* d);
 //@}
 #endif
 
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-decoded-inst-api.h------------------------------------------
 
-//xed-inst.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-inst.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -4055,9 +4042,9 @@ xed_exception_enum_t xed_inst_exception(const xed_inst_t* p) {
 XED_DLL_EXPORT const xed_inst_t* xed_inst_table_base(void);
 
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-inst.h------------------------------------------
 
-//xed-iclass-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-iclass-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -6058,7 +6045,7 @@ END_LEGAL */
 #define XED_ICLASS_XSUSLDTRK_DEFINED 1
 #define XED_ICLASS_XTEST_DEFINED 1
 #define XED_ICLASS_LAST_DEFINED 1
-typedef enum xed_iclass_enum_t_ {
+typedef enum {
   XED_ICLASS_INVALID,
   XED_ICLASS_AAA,
   XED_ICLASS_AAD,
@@ -8053,9 +8040,9 @@ XED_DLL_EXPORT const char* xed_iclass_enum_t2str(const xed_iclass_enum_t p);
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_iclass_enum_t xed_iclass_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-iclass-enum.h------------------------------------------
 
-//xed-category-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-category-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -8195,7 +8182,7 @@ END_LEGAL */
 #define XED_CATEGORY_XSAVE_DEFINED 1
 #define XED_CATEGORY_XSAVEOPT_DEFINED 1
 #define XED_CATEGORY_LAST_DEFINED 1
-typedef enum xed_category_enum_t_ {
+typedef enum {
   XED_CATEGORY_INVALID,
   XED_CATEGORY_3DNOW,
   XED_CATEGORY_ADOX_ADCX,
@@ -8329,9 +8316,9 @@ XED_DLL_EXPORT const char* xed_category_enum_t2str(const xed_category_enum_t p);
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_category_enum_t xed_category_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-category-enum.h------------------------------------------
 
-//xed-extension-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-extension-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -8465,7 +8452,7 @@ END_LEGAL */
 #define XED_EXTENSION_XSAVEOPT_DEFINED 1
 #define XED_EXTENSION_XSAVES_DEFINED 1
 #define XED_EXTENSION_LAST_DEFINED 1
-typedef enum xed_extension_enum_t_ {
+typedef enum {
   XED_EXTENSION_INVALID,
   XED_EXTENSION_3DNOW,
   XED_EXTENSION_3DNOW_PREFETCH,
@@ -8593,9 +8580,9 @@ XED_DLL_EXPORT const char* xed_extension_enum_t2str(const xed_extension_enum_t p
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_extension_enum_t xed_extension_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-extension-enum.h------------------------------------------
 
-//xed-attribute-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-attribute-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -8726,7 +8713,7 @@ END_LEGAL */
 #define XED_ATTRIBUTE_XMM_STATE_R_DEFINED 1
 #define XED_ATTRIBUTE_XMM_STATE_W_DEFINED 1
 #define XED_ATTRIBUTE_LAST_DEFINED 1
-typedef enum xed_attribute_enum_t_ {
+typedef enum {
   XED_ATTRIBUTE_INVALID,
   XED_ATTRIBUTE_AMDONLY,
   XED_ATTRIBUTE_APX_NDD,
@@ -8851,9 +8838,9 @@ XED_DLL_EXPORT const char* xed_attribute_enum_t2str(const xed_attribute_enum_t p
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_attribute_enum_t xed_attribute_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-attribute-enum.h------------------------------------------
 
-//xed-exception-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-exception-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -8966,7 +8953,7 @@ END_LEGAL */
 #define XED_EXCEPTION_USER_MSR_LEGACY_DEFINED 1
 #define XED_EXCEPTION_USER_MSR_VEX_DEFINED 1
 #define XED_EXCEPTION_LAST_DEFINED 1
-typedef enum xed_exception_enum_t_ {
+typedef enum {
   XED_EXCEPTION_INVALID,
   XED_EXCEPTION_AMX_E1,
   XED_EXCEPTION_AMX_E10,
@@ -9073,9 +9060,9 @@ XED_DLL_EXPORT const char* xed_exception_enum_t2str(const xed_exception_enum_t p
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_exception_enum_t xed_exception_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-exception-enum.h------------------------------------------
 
-//xed-operand-element-type-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-operand-element-type-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -9117,7 +9104,7 @@ END_LEGAL */
 #define XED_OPERAND_ELEMENT_TYPE_INT8_DEFINED 1
 #define XED_OPERAND_ELEMENT_TYPE_UINT8_DEFINED 1
 #define XED_OPERAND_ELEMENT_TYPE_LAST_DEFINED 1
-typedef enum xed_operand_element_type_enum_t_ {
+typedef enum {
   XED_OPERAND_ELEMENT_TYPE_INVALID,
   XED_OPERAND_ELEMENT_TYPE_UINT, ///< Unsigned integer
   XED_OPERAND_ELEMENT_TYPE_INT, ///< Signed integer
@@ -9153,9 +9140,9 @@ XED_DLL_EXPORT const char* xed_operand_element_type_enum_t2str(const xed_operand
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_operand_element_type_enum_t xed_operand_element_type_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-operand-element-type-enum.h------------------------------------------
 
-//xed-operand-element-xtype-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-operand-element-xtype-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -9217,7 +9204,7 @@ END_LEGAL */
 #define XED_OPERAND_XTYPE_UINT_DEFINED 1
 #define XED_OPERAND_XTYPE_VAR_DEFINED 1
 #define XED_OPERAND_XTYPE_LAST_DEFINED 1
-typedef enum xed_operand_element_xtype_enum_t_ {
+typedef enum {
   XED_OPERAND_XTYPE_INVALID,
   XED_OPERAND_XTYPE_2BF16,
   XED_OPERAND_XTYPE_2BF8,
@@ -9273,9 +9260,9 @@ XED_DLL_EXPORT const char* xed_operand_element_xtype_enum_t2str(const xed_operan
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_operand_element_xtype_enum_t xed_operand_element_xtype_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-operand-element-xtype-enum.h------------------------------------------
 
-//xed-disas.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-disas.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -9327,9 +9314,9 @@ typedef  int (*xed_disassembly_callback_fn_t)(
     void*         context);
 
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-disas.h------------------------------------------
 
-//xed-format-options.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-format-options.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -9360,7 +9347,7 @@ END_LEGAL */
 /// Options for the disasembly formatting functions. Set once during
 /// initialization by a calling #xed_format_set_options
 ///  @ingroup PRINT
-typedef struct xed_format_options_t_ {
+typedef struct {
     /// by default, XED prints the hex address before any symbolic name for
     /// branch targets. If set to zero, then XED will not print the hex
     /// address before a valid symbolic name.
@@ -9400,9 +9387,9 @@ xed_format_set_options(xed_format_options_t format_options);
 //@}
 
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-format-options.h------------------------------------------
 
-//xed-iform-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-iform-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -18383,7 +18370,7 @@ END_LEGAL */
 #define XED_IFORM_XSUSLDTRK_DEFINED 1
 #define XED_IFORM_XTEST_DEFINED 1
 #define XED_IFORM_LAST_DEFINED 1
-typedef enum xed_iform_enum_t_ {
+typedef enum {
   XED_IFORM_INVALID=0, 
   XED_IFORM_AAA=1, 
   XED_IFORM_AAD_IMMb=2, 
@@ -27358,9 +27345,9 @@ XED_DLL_EXPORT const char* xed_iform_enum_t2str(const xed_iform_enum_t p);
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_iform_enum_t xed_iform_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-iform-enum.h------------------------------------------
 
-//xed-iformfl-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-iformfl-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -31318,7 +31305,7 @@ END_LEGAL */
 #define XED_IFORMFL_XTEST_FIRST_DEFINED 1
 #define XED_IFORMFL_XTEST_LAST_DEFINED 1
 #define XED_IFORMFL_LAST_DEFINED 1
-typedef enum xed_iformfl_enum_t_ {
+typedef enum {
   XED_IFORMFL_AAA_FIRST=1, 
   XED_IFORMFL_AAA_LAST=1, 
   XED_IFORMFL_AAD_FIRST=2, 
@@ -35259,9 +35246,9 @@ typedef enum xed_iformfl_enum_t_ {
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_iformfl_enum_t xed_iformfl_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-iformfl-enum.h------------------------------------------
 
-//xed-iform-map.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-iform-map.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -35372,9 +35359,9 @@ XED_DLL_EXPORT
 char const* xed_iform_to_iclass_string_intel(xed_iform_enum_t iform);
 
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-iform-map.h------------------------------------------
 
-//xed-rep-prefix.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-rep-prefix.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -35433,9 +35420,9 @@ XED_DLL_EXPORT xed_iclass_enum_t xed_rep_map(xed_iclass_enum_t iclass);
 XED_DLL_EXPORT xed_iclass_enum_t xed_norep_map(xed_iclass_enum_t iclass);
 //@}
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-rep-prefix.h------------------------------------------
 
-//xed-agen.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-agen.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -35500,9 +35487,9 @@ XED_DLL_EXPORT xed_error_enum_t xed_agen(xed_decoded_inst_t* xedd,
 
 
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-agen.h------------------------------------------
 
-//xed-cpuid-rec.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-cpuid-rec.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -35529,7 +35516,7 @@ END_LEGAL */
 
 /// @ingroup CPUID
 /// @brief a data structure representing a CPUID record
-typedef struct xed_cpuid_rec_t_ {
+typedef struct {
     xed_uint32_t leaf;      ///< cpuid leaf
     xed_uint32_t subleaf;   ///< cpuid subleaf
     xed_reg_enum_t reg;     ///< the register containing the bits (EAX,EBX,ECX,EDX)
@@ -35575,9 +35562,9 @@ xed_get_cpuid_rec(xed_cpuid_rec_enum_t cpuid_bit,
 
 #endif
 
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-cpuid-rec.h------------------------------------------
 
-//xed-isa-set.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-isa-set.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -35611,9 +35598,9 @@ xed_isa_set_is_valid_for_chip(xed_isa_set_enum_t isa_set,
 
     
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-isa-set.h------------------------------------------
 
-//xed-address-width-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-address-width-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -35643,7 +35630,7 @@ END_LEGAL */
 #define XED_ADDRESS_WIDTH_32b_DEFINED 1
 #define XED_ADDRESS_WIDTH_64b_DEFINED 1
 #define XED_ADDRESS_WIDTH_LAST_DEFINED 1
-typedef enum xed_address_width_enum_t_ {
+typedef enum {
   XED_ADDRESS_WIDTH_INVALID=0,
   XED_ADDRESS_WIDTH_16b=2, ///< 16b addressing
   XED_ADDRESS_WIDTH_32b=4, ///< 32b addressing
@@ -35667,9 +35654,9 @@ XED_DLL_EXPORT const char* xed_address_width_enum_t2str(const xed_address_width_
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_address_width_enum_t xed_address_width_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-address-width-enum.h------------------------------------------
 
-//xed-attributes.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-attributes.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -35691,15 +35678,15 @@ END_LEGAL */
 #if !defined(XED_ATTRIBUTES_H)
 # define XED_ATTRIBUTES_H
 
-typedef struct xed_attributes_t_ {
+typedef struct {
     xed_uint64_t a1;
     xed_uint64_t a2;
 } xed_attributes_t;
 
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-attributes.h------------------------------------------
 
-//xed-chip-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-chip-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -35799,7 +35786,7 @@ END_LEGAL */
 #define XED_CHIP_FUTURE_DEFINED 1
 #define XED_CHIP_ALL_DEFINED 1
 #define XED_CHIP_LAST_DEFINED 1
-typedef enum xed_chip_enum_t_ {
+typedef enum {
   XED_CHIP_INVALID,
   XED_CHIP_I86,
   XED_CHIP_I86FP,
@@ -35893,9 +35880,9 @@ XED_DLL_EXPORT const char* xed_chip_enum_t2str(const xed_chip_enum_t p);
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_chip_enum_t xed_chip_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-chip-enum.h------------------------------------------
 
-//xed-chip-features.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-chip-features.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -35920,8 +35907,8 @@ END_LEGAL */
 
 #define XED_FEATURE_VECTOR_MAX 7
 /// @ingroup ISASET
-typedef struct xed_chip_features_t_ {
-
+typedef struct 
+{
     xed_uint64_t f[XED_FEATURE_VECTOR_MAX];
 } xed_chip_features_t;
 
@@ -35938,9 +35925,9 @@ xed_modify_chip_features(xed_chip_features_t* p,
 
     
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-chip-features.h------------------------------------------
 
-//xed-common-defs.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-common-defs.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -35988,9 +35975,9 @@ END_LEGAL */
 
 
 
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-common-defs.h------------------------------------------
 
-//xed-convert-table-init.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-convert-table-init.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -36015,7 +36002,7 @@ END_LEGAL */
 
 #if !defined(XED_CONVERT_TABLE_INIT_H)
 # define XED_CONVERT_TABLE_INIT_H
-typedef struct xed_convert_table_t_ {
+typedef struct {
 
    const char** table_name;
 
@@ -36026,9 +36013,9 @@ typedef struct xed_convert_table_t_ {
 } xed_convert_table_t;
 extern xed_convert_table_t xed_convert_table[XED_OPERAND_CONVERT_LAST];
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-convert-table-init.h------------------------------------------
 
-//xed-cpuid-group-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-cpuid-group-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -36371,7 +36358,7 @@ END_LEGAL */
 #define XED_CPUID_GROUP_XSAVEOPT_DEFINED 1
 #define XED_CPUID_GROUP_XSAVES_DEFINED 1
 #define XED_CPUID_GROUP_LAST_DEFINED 1
-typedef enum xed_cpuid_group_enum_t_ {
+typedef enum {
   XED_CPUID_GROUP_INVALID,
   XED_CPUID_GROUP_ADOX_ADCX,
   XED_CPUID_GROUP_AES,
@@ -36708,9 +36695,9 @@ XED_DLL_EXPORT const char* xed_cpuid_group_enum_t2str(const xed_cpuid_group_enum
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_cpuid_group_enum_t xed_cpuid_group_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-cpuid-group-enum.h------------------------------------------
 
-//xed-cpuid-rec-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-cpuid-rec-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -36880,7 +36867,7 @@ END_LEGAL */
 #define XED_CPUID_REC_XSAVEOPT_DEFINED 1
 #define XED_CPUID_REC_XSAVES_DEFINED 1
 #define XED_CPUID_REC_LAST_DEFINED 1
-typedef enum xed_cpuid_rec_enum_t_ {
+typedef enum {
   XED_CPUID_REC_INVALID,
   XED_CPUID_REC_ADOXADCX,
   XED_CPUID_REC_AES,
@@ -37044,9 +37031,9 @@ XED_DLL_EXPORT const char* xed_cpuid_rec_enum_t2str(const xed_cpuid_rec_enum_t p
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_cpuid_rec_enum_t xed_cpuid_rec_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-cpuid-rec-enum.h------------------------------------------
 
-//xed-encoder-gen-defs.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-encoder-gen-defs.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -37079,9 +37066,9 @@ END_LEGAL */
 #define XED_ENCODE_MAX_IFORMS 11222
 #define XED_ENC_GROUPS 599
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-encoder-gen-defs.h------------------------------------------
 
-//xed-encoder-iforms.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-encoder-iforms.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -37163,9 +37150,9 @@ typedef struct xed_encoder_iforms_s {
     xed_uint32_t x_MEMDISP;
 } xed_encoder_iforms_t;
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-encoder-iforms.h------------------------------------------
 
-//xed-error-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-error-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -37212,7 +37199,7 @@ END_LEGAL */
 #define XED_ERROR_BAD_EVEX_LL_DEFINED 1
 #define XED_ERROR_BAD_REG_MATCH_DEFINED 1
 #define XED_ERROR_LAST_DEFINED 1
-typedef enum xed_error_enum_t_ {
+typedef enum {
   XED_ERROR_NONE, ///< There was no error
   XED_ERROR_BUFFER_TOO_SHORT, ///< There were not enough bytes in the given buffer
   XED_ERROR_GENERAL_ERROR, ///< XED could not decode the given instruction
@@ -37253,9 +37240,9 @@ XED_DLL_EXPORT const char* xed_error_enum_t2str(const xed_error_enum_t p);
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_error_enum_t xed_error_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-error-enum.h------------------------------------------
 
-//xed-flag-action-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-flag-action-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -37289,7 +37276,7 @@ END_LEGAL */
 #define XED_FLAG_ACTION_ah_DEFINED 1
 #define XED_FLAG_ACTION_1_DEFINED 1
 #define XED_FLAG_ACTION_LAST_DEFINED 1
-typedef enum xed_flag_action_enum_t_ {
+typedef enum {
   XED_FLAG_ACTION_INVALID,
   XED_FLAG_ACTION_u, ///< undefined (treated as a write)
   XED_FLAG_ACTION_tst, ///< test (read)
@@ -37317,9 +37304,9 @@ XED_DLL_EXPORT const char* xed_flag_action_enum_t2str(const xed_flag_action_enum
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_flag_action_enum_t xed_flag_action_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-flag-action-enum.h------------------------------------------
 
-//xed-flag-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-flag-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -37367,7 +37354,7 @@ END_LEGAL */
 #define XED_FLAG_fc2_DEFINED 1
 #define XED_FLAG_fc3_DEFINED 1
 #define XED_FLAG_LAST_DEFINED 1
-typedef enum xed_flag_enum_t_ {
+typedef enum {
   XED_FLAG_INVALID,
   XED_FLAG_of, ///<< overflow flag
   XED_FLAG_sf, ///< sign flag
@@ -37409,9 +37396,9 @@ XED_DLL_EXPORT const char* xed_flag_enum_t2str(const xed_flag_enum_t p);
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_flag_enum_t xed_flag_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-flag-enum.h------------------------------------------
 
-//xed-flags.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-flags.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -37658,9 +37645,9 @@ static XED_INLINE unsigned int xed_flag_set_mask(const xed_flag_set_t* p) {
 ////////////////////////////////////////////////////////////////////////////
 
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-flags.h------------------------------------------
 
-//xed-gen-table-defs.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-gen-table-defs.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -37700,9 +37687,9 @@ END_LEGAL */
 #define XED_MAX_MAP_VEX  7
 #define XED_MAX_MAP_EVEX 7
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-gen-table-defs.h------------------------------------------
 
-//xed-get-time.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-get-time.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -37724,10 +37711,7 @@ END_LEGAL */
 #if !defined(XED_GET_TIME_H)
 #   define XED_GET_TIME_H
 
-#   include "xed-portability.h"
-#   include "xed-types.h"
 #   if defined(__INTEL_COMPILER) && __INTEL_COMPILER > 810  && !defined(_M_IA64)
-#      include <ia32intrin.h>
 #   endif
 #   if defined(__INTEL_COMPILER) && __INTEL_COMPILER >= 810  && !defined(_M_IA64)
 #      if __INTEL_COMPILER < 1000
@@ -37737,12 +37721,10 @@ END_LEGAL */
 #   if !defined(__INTEL_COMPILER)
        /* MSVS8 and later */
 #      if defined(_MSC_VER) && _MSC_VER >= 1400 && !defined(_M_IA64)
-#         include <intrin.h>
 #         pragma intrinsic(__rdtsc)
 #      endif
 #      if defined(__GNUC__)
 #         if defined(__i386__) || defined(i386) || defined(i686) || defined(__x86_64__)
-#             include <x86intrin.h>
 #         endif
 #      endif
 #   endif
@@ -37778,9 +37760,9 @@ static XED_INLINE  xed_uint64_t xed_get_time(void) {
 }
 #undef XED_FOUND_RDTSC
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-get-time.h------------------------------------------
 
-//xed-ild-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-ild-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -37827,7 +37809,7 @@ END_LEGAL */
 #define XED_ILD_VEX_MAP7_DEFINED 1
 #define XED_ILD_MAP_INVALID_DEFINED 1
 #define XED_ILD_LAST_DEFINED 1
-typedef enum xed_ild_map_enum_t_ {
+typedef enum {
   XED_ILD_AMD_3DNOW=4,
   XED_ILD_AMD_XOP8=8,
   XED_ILD_AMD_XOP9=9,
@@ -37868,9 +37850,9 @@ XED_DLL_EXPORT const char* xed_ild_map_enum_t2str(const xed_ild_map_enum_t p);
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_ild_map_enum_t xed_ild_map_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-ild-enum.h------------------------------------------
 
-//xed-immdis.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-immdis.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -38067,9 +38049,9 @@ xed_immdis_print_value_unsigned(const xed_immdis_t* p, char* buf, int buflen);
 //@}
 
 
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-immdis.h------------------------------------------
 
-//xed-immed.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-immed.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -38115,9 +38097,9 @@ XED_DLL_EXPORT xed_int64_t xed_immed_from_bytes(xed_int8_t* bytes, xed_uint_t n)
 
 
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-immed.h------------------------------------------
 
-//xed-init-pointer-names.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-init-pointer-names.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -38144,9 +38126,9 @@ END_LEGAL */
 # define XED_INIT_POINTER_NAMES_H
 #define XED_MAX_POINTER_NAMES 65
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-init-pointer-names.h------------------------------------------
 
-//xed-interface.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-interface.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -38197,9 +38179,9 @@ END_LEGAL */
 
 
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-interface.h------------------------------------------
 
-//xed-isa-set-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-isa-set-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -38506,7 +38488,7 @@ END_LEGAL */
 #define XED_ISA_SET_XSAVEOPT_DEFINED 1
 #define XED_ISA_SET_XSAVES_DEFINED 1
 #define XED_ISA_SET_LAST_DEFINED 1
-typedef enum xed_isa_set_enum_t_ {
+typedef enum {
   XED_ISA_SET_INVALID,
   XED_ISA_SET_3DNOW,
   XED_ISA_SET_ADOX_ADCX,
@@ -38807,9 +38789,9 @@ XED_DLL_EXPORT const char* xed_isa_set_enum_t2str(const xed_isa_set_enum_t p);
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_isa_set_enum_t xed_isa_set_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-isa-set-enum.h------------------------------------------
 
-//xed-machine-mode-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-machine-mode-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -38843,7 +38825,7 @@ END_LEGAL */
 #define XED_MACHINE_MODE_REAL_16_DEFINED 1
 #define XED_MACHINE_MODE_REAL_32_DEFINED 1
 #define XED_MACHINE_MODE_LAST_DEFINED 1
-typedef enum xed_machine_mode_enum_t_ {
+typedef enum {
   XED_MACHINE_MODE_INVALID,
   XED_MACHINE_MODE_LONG_64, ///< 64b operating mode
   XED_MACHINE_MODE_LONG_COMPAT_32, ///< 32b protected mode
@@ -38871,9 +38853,9 @@ XED_DLL_EXPORT const char* xed_machine_mode_enum_t2str(const xed_machine_mode_en
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_machine_mode_enum_t xed_machine_mode_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-machine-mode-enum.h------------------------------------------
 
-//xed-mapu-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-mapu-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -38920,7 +38902,7 @@ END_LEGAL */
 #define XED_MAPU_VEX_MAP5_DEFINED 1
 #define XED_MAPU_VEX_MAP7_DEFINED 1
 #define XED_MAPU_LAST_DEFINED 1
-typedef enum xed_mapu_enum_t_ {
+typedef enum {
   XED_MAPU_INVALID,
   XED_MAPU_AMD_3DNOW,
   XED_MAPU_AMD_XOP8,
@@ -38961,9 +38943,9 @@ XED_DLL_EXPORT const char* xed_mapu_enum_t2str(const xed_mapu_enum_t p);
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_mapu_enum_t xed_mapu_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-mapu-enum.h------------------------------------------
 
-//xed-nonterminal-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-nonterminal-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -39262,7 +39244,7 @@ END_LEGAL */
 #define XED_NONTERMINAL_ZMM_R3_32_DEFINED 1
 #define XED_NONTERMINAL_ZMM_R3_64_DEFINED 1
 #define XED_NONTERMINAL_LAST_DEFINED 1
-typedef enum xed_nonterminal_enum_t_ {
+typedef enum {
   XED_NONTERMINAL_INVALID,
   XED_NONTERMINAL_AR10,
   XED_NONTERMINAL_AR11,
@@ -39555,9 +39537,9 @@ XED_DLL_EXPORT const char* xed_nonterminal_enum_t2str(const xed_nonterminal_enum
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_nonterminal_enum_t xed_nonterminal_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-nonterminal-enum.h------------------------------------------
 
-//xed-operand-accessors.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-operand-accessors.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -41267,9 +41249,9 @@ static XED_INLINE void xed3_operand_set_scc(xed_decoded_inst_t* d, xed_bits_t op
 d->_operands.scc = (xed_uint8_t)opval;
 }
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-operand-accessors.h------------------------------------------
 
-//xed-operand-action-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-operand-action-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -41303,7 +41285,7 @@ END_LEGAL */
 #define XED_OPERAND_ACTION_CRW_DEFINED 1
 #define XED_OPERAND_ACTION_CR_DEFINED 1
 #define XED_OPERAND_ACTION_LAST_DEFINED 1
-typedef enum xed_operand_action_enum_t_ {
+typedef enum {
   XED_OPERAND_ACTION_INVALID,
   XED_OPERAND_ACTION_RW, ///< Read and written (must write)
   XED_OPERAND_ACTION_R, ///< Read-only
@@ -41331,9 +41313,9 @@ XED_DLL_EXPORT const char* xed_operand_action_enum_t2str(const xed_operand_actio
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_operand_action_enum_t xed_operand_action_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-operand-action-enum.h------------------------------------------
 
-//xed-operand-convert-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-operand-convert-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -41380,7 +41362,7 @@ END_LEGAL */
 #define XED_OPERAND_CONVERT_MULTIREG15_DEFINED 1
 #define XED_OPERAND_CONVERT_MULTIREG16_DEFINED 1
 #define XED_OPERAND_CONVERT_LAST_DEFINED 1
-typedef enum xed_operand_convert_enum_t_ {
+typedef enum {
   XED_OPERAND_CONVERT_INVALID,
   XED_OPERAND_CONVERT_ZEROSTR,
   XED_OPERAND_CONVERT_SAESTR,
@@ -41421,9 +41403,9 @@ XED_DLL_EXPORT const char* xed_operand_convert_enum_t2str(const xed_operand_conv
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_operand_convert_enum_t xed_operand_convert_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-operand-convert-enum.h------------------------------------------
 
-//xed-operand-ctype-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-operand-ctype-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -41459,7 +41441,7 @@ END_LEGAL */
 #define XED_OPERAND_CTYPE_XED_UINT64_T_DEFINED 1
 #define XED_OPERAND_CTYPE_XED_UINT8_T_DEFINED 1
 #define XED_OPERAND_CTYPE_LAST_DEFINED 1
-typedef enum xed_operand_ctype_enum_t_ {
+typedef enum {
   XED_OPERAND_CTYPE_INVALID,
   XED_OPERAND_CTYPE_XED_BITS_T,
   XED_OPERAND_CTYPE_XED_CHIP_ENUM_T,
@@ -41489,9 +41471,9 @@ XED_DLL_EXPORT const char* xed_operand_ctype_enum_t2str(const xed_operand_ctype_
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_operand_ctype_enum_t xed_operand_ctype_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-operand-ctype-enum.h------------------------------------------
 
-//xed-operand-ctype-map.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-operand-ctype-map.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -41519,9 +41501,9 @@ END_LEGAL */
 xed_operand_ctype_enum_t xed_operand_get_ctype(xed_operand_enum_t opname);
 unsigned int xed_operand_decider_get_width(xed_operand_enum_t opname);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-operand-ctype-map.h------------------------------------------
 
-//xed-operand-storage.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-operand-storage.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -41689,9 +41671,9 @@ typedef struct xed_operand_storage_s {
     xed_uint64_t uimm0;
 } xed_operand_storage_t;
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-operand-storage.h------------------------------------------
 
-//xed-operand-type-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-operand-type-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -41725,7 +41707,7 @@ END_LEGAL */
 #define XED_OPERAND_TYPE_NT_LOOKUP_FN4_DEFINED 1
 #define XED_OPERAND_TYPE_REG_DEFINED 1
 #define XED_OPERAND_TYPE_LAST_DEFINED 1
-typedef enum xed_operand_type_enum_t_ {
+typedef enum {
   XED_OPERAND_TYPE_INVALID,
   XED_OPERAND_TYPE_ERROR,
   XED_OPERAND_TYPE_IMM,
@@ -41753,9 +41735,9 @@ XED_DLL_EXPORT const char* xed_operand_type_enum_t2str(const xed_operand_type_en
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_operand_type_enum_t xed_operand_type_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-operand-type-enum.h------------------------------------------
 
-//xed-operand-values-interface.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-operand-values-interface.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -42280,9 +42262,9 @@ xed_operand_values_set_operand_reg(xed_operand_values_t* p,
 //@}
 #endif
 
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-operand-values-interface.h------------------------------------------
 
-//xed-operand-visibility-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-operand-visibility-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -42312,7 +42294,7 @@ END_LEGAL */
 #define XED_OPVIS_IMPLICIT_DEFINED 1
 #define XED_OPVIS_SUPPRESSED_DEFINED 1
 #define XED_OPVIS_LAST_DEFINED 1
-typedef enum xed_operand_visibility_enum_t_ {
+typedef enum {
   XED_OPVIS_INVALID,
   XED_OPVIS_EXPLICIT, ///< Shows up in operand encoding
   XED_OPVIS_IMPLICIT, ///< Part of the opcode, but listed as an operand
@@ -42336,9 +42318,9 @@ XED_DLL_EXPORT const char* xed_operand_visibility_enum_t2str(const xed_operand_v
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_operand_visibility_enum_t xed_operand_visibility_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-operand-visibility-enum.h------------------------------------------
 
-//xed-operand-width-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-operand-width-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -42500,7 +42482,7 @@ END_LEGAL */
 #define XED_OPERAND_WIDTH_Z4I8_DEFINED 1
 #define XED_OPERAND_WIDTH_Z2I8_DEFINED 1
 #define XED_OPERAND_WIDTH_LAST_DEFINED 1
-typedef enum xed_operand_width_enum_t_ {
+typedef enum {
   XED_OPERAND_WIDTH_INVALID,
   XED_OPERAND_WIDTH_ASZ,
   XED_OPERAND_WIDTH_SSZ,
@@ -42656,9 +42638,9 @@ XED_DLL_EXPORT const char* xed_operand_width_enum_t2str(const xed_operand_width_
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_operand_width_enum_t xed_operand_width_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-operand-width-enum.h------------------------------------------
 
-//xed-print-info.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-print-info.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -42685,7 +42667,7 @@ END_LEGAL */
 /// This contains the information used by the various disassembly printers.
 /// Call xed_init_print_info to initialize the fields.  Then change the
 /// required and optional fields when required.
-typedef struct xed_print_info_t_ {
+typedef struct {
 
     /////////////////////////////////////////
     // REQUIRED FIELDS - users should set these
@@ -42755,9 +42737,9 @@ typedef struct xed_print_info_t_ {
 XED_DLL_EXPORT void xed_init_print_info(xed_print_info_t* pi);
 
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-print-info.h------------------------------------------
 
-//xed-reg-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-reg-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -43204,7 +43186,7 @@ END_LEGAL */
 #define XED_REG_YMM_LAST_DEFINED 1
 #define XED_REG_ZMM_FIRST_DEFINED 1
 #define XED_REG_ZMM_LAST_DEFINED 1
-typedef enum xed_reg_enum_t_ {
+typedef enum {
   XED_REG_INVALID,
   XED_REG_BNDCFGU,
   XED_REG_BNDSTATUS,
@@ -43645,9 +43627,9 @@ XED_DLL_EXPORT const char* xed_reg_enum_t2str(const xed_reg_enum_t p);
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_reg_enum_t xed_reg_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
+//------------------------------------------end xed-reg-enum.h------------------------------------------
 
-//xed-reg-role-enum.h ------------------------------------------ ------------------------------------------
+//------------------------------------------start xed-reg-role-enum.h------------------------------------------
 /* BEGIN_LEGAL 
 
 Copyright (c) 2024 Intel Corporation
@@ -43680,7 +43662,7 @@ END_LEGAL */
 #define XED_REG_ROLE_BASE1_DEFINED 1
 #define XED_REG_ROLE_INDEX_DEFINED 1
 #define XED_REG_ROLE_LAST_DEFINED 1
-typedef enum xed_reg_role_enum_t_ {
+typedef enum {
   XED_REG_ROLE_INVALID,
   XED_REG_ROLE_NORMAL, ///< Register is a normal register
   XED_REG_ROLE_SEGREG0, ///< The segment register associated with the first memop
@@ -43707,6 +43689,5 @@ XED_DLL_EXPORT const char* xed_reg_role_enum_t2str(const xed_reg_role_enum_t p);
 /// @ingroup ENUM
 XED_DLL_EXPORT xed_reg_role_enum_t xed_reg_role_enum_t_last(void);
 #endif
-//--------------------------------------------------------------------------------------------------------
-
+//------------------------------------------end xed-reg-role-enum.h------------------------------------------
 

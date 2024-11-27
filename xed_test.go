@@ -17,13 +17,6 @@ import (
 func TestMergeHeader(t *testing.T) {
 	names := stream.NewOrderedMap("", 0)
 	debugIndex := 0
-
-	isIncludeLine := func(s string) bool {
-		//xed-get-time.h   todo bug
-		//#   include "xed-portability.h"
-		//#   include "xed-types.h"
-		return strings.HasPrefix(s, "#include") || strings.HasPrefix(s, "# include")
-	}
 	includePath := "kits/xed-install-base-2024-11-27-win-x86-64/include/xed"
 	var allNames []string
 	filepath.Walk(includePath, func(path string, info fs.FileInfo, err error) error {
@@ -33,7 +26,7 @@ func TestMergeHeader(t *testing.T) {
 		if filepath.Base(path) == "xed-interface.h" {
 			index := 0
 			for _, s := range stream.ToLines(path) {
-				if isIncludeLine(s) {
+				if stream.IsIncludeLine(s) {
 					index++
 					s = strings.TrimPrefix(s, "#include")
 					s = strings.TrimPrefix(s, "# include")
@@ -68,17 +61,23 @@ func TestMergeHeader(t *testing.T) {
 		names.Set(name, lastIndex)
 	}
 	b := stream.NewBuffer("")
+	sep := "------------------------------------------"
 	for _, p := range names.List() {
 		mylog.Success(p.Key, p.Value)
-		b.WriteStringLn("//" + p.Key + " ------------------------------------------ ------------------------------------------")
+
+		b.WriteStringLn("//" + sep + "start " + p.Key + sep)
 		// b.NewLine()
-		for _, s := range stream.ToLines(filepath.Join(includePath, p.Key)) {
-			if isIncludeLine(s) {
+		lines := stream.ToLines(filepath.Join(includePath, p.Key))
+		for i, s := range lines {
+			if stream.IsIncludeLine(s) {
 				continue
 			}
-			b.WriteStringLn(s)
+			b.WriteString(s)
+			if i < len(lines) {
+				b.NewLine()
+			}
 		}
-		b.WriteStringLn("//--------------------------------------------------------------------------------------------------------")
+		b.WriteStringLn("//" + sep + "end " + p.Key + sep)
 		b.NewLine()
 	}
 	stream.WriteTruncate("xed_merged.h", b.Bytes())
