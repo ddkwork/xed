@@ -1,8 +1,6 @@
 package xed
 
 import (
-	"github.com/ddkwork/app/bindgen/clang"
-	"github.com/ddkwork/app/bindgen/gengo"
 	"io/fs"
 	"path/filepath"
 	"strings"
@@ -92,7 +90,7 @@ set(CMAKE_C_STANDARD 11)
 	}
 	gSub.P(")")
 	stream.WriteTruncate("kits/xed-install-base-2024-11-27-win-x86-64/examples/examples/CMakeLists.txt", gSub.Bytes())
-	//stream.WriteGoFile("xed_test.go", gXedUintTest.Bytes())
+	// stream.WriteGoFile("xed_test.go", gXedUintTest.Bytes())
 }
 
 const parseTest = `
