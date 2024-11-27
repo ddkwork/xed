@@ -47,6 +47,7 @@ func TestMakeExampleCmakePackages(t *testing.T) {
 		default:
 			project.name = strings.TrimPrefix(project.name, "xed")
 			project.name = strings.TrimPrefix(project.name, "Xed")
+			project.name = strings.TrimPrefix(project.name, "Examples")
 		}
 		project.name = strings.ReplaceAll(project.name, "Asmparse", "AsmParse")
 		mylog.Success(project.name, project.cFilePath)
@@ -78,13 +79,16 @@ set(CMAKE_C_STANDARD 11)
 		stream.WriteTruncate(filepath.Join(projectRoot, "xed-ild.lib"), stream.NewBuffer("kits/xed-install-base-2024-11-27-win-x86-64/lib/xed-ild.lib"))
 	}
 
+	gXedUintTest := stream.NewGeneratedFile()
 	gSub := stream.NewGeneratedFile()
 	gSub.P("add_subdirectory(")
 	for _, name := range subNames {
 		gSub.P(name)
+		gXedUintTest.P("func Test", name, "(t *testing.T) {}")
 	}
 	gSub.P(")")
 	stream.WriteTruncate("kits/xed-install-base-2024-11-27-win-x86-64/examples/examples/CMakeLists.txt", gSub.Bytes())
+	println(gXedUintTest.String())
 	// 复制 parse 测试命令   生成go单元测试签名
 }
 
