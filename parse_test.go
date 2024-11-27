@@ -1,10 +1,69 @@
 package xed
 
 import (
+	"io/fs"
+	"path/filepath"
+	"strings"
 	"testing"
+
+	"github.com/ddkwork/golibrary/stream"
 
 	"github.com/ddkwork/golibrary/mylog"
 )
+
+const cmakeListName = "CMakeLists.txt"
+
+type (
+	examples struct {
+		cFilePath  string
+		name       string
+		cmakeLists string
+	}
+)
+
+func TestMakeExampleCmakePackages(t *testing.T) {
+	projects := make([]examples, 0)
+	filepath.Walk("kits", func(path string, info fs.FileInfo, err error) error {
+		if info.IsDir() {
+			return err
+		}
+		if strings.Contains(path, "cmake-build-debug") {
+			return err
+		}
+		if filepath.Ext(path) != ".c" {
+			return err
+		}
+		mylog.Success(filepath.Base(path), path)
+		projects = append(projects, examples{
+			cFilePath:  path,
+			name:       stream.ToCamelToLower(stream.BaseName(path), false),
+			cmakeLists: "",
+		})
+		return err
+	})
+
+	for _, project := range projects {
+		g := stream.NewGeneratedFile()
+		g.P(`
+cmake_minimum_required(VERSION 3.30)
+set(CMAKE_C_STANDARD 11)
+`)
+		g.P("project(", project.name, " C)")
+		g.P()
+
+		g.P("include_directories(../../include)")
+		g.P("link_directories(${CMAKE_SOURCE_DIR})")
+		g.P("add_executable(", project.name, '"', ")")
+		g.P("target_link_libraries(", project.name, " xed)")
+
+		projectRoot := "D:\\workspace\\workspace\\debuger\\xed\\kits\\xed-install-base-2024-11-27-win-x86-64\\examples"
+		projectRoot = filepath.Join(projectRoot, "examples", project.name)
+		stream.WriteTruncate(filepath.Join(projectRoot, cmakeListName), g.Bytes())
+		stream.WriteTruncate(filepath.Join(projectRoot, filepath.Base(project.cFilePath)), stream.NewBuffer(project.cFilePath))
+		stream.WriteTruncate(filepath.Join(projectRoot, "xed.lib"), stream.NewBuffer("kits/xed-install-base-2024-11-27-win-x86-64/lib/xed.lib"))
+		stream.WriteTruncate(filepath.Join(projectRoot, "xed-ild.lib"), stream.NewBuffer("kits/xed-install-base-2024-11-27-win-x86-64/lib/xed-ild.lib"))
+	}
+}
 
 func TestParseAssemble64(t *testing.T) {
 	assemble64 := ParseAssemble[uint64](0, " mov rax,qword ptr ss:[rsp+40]", func(text string, value uint64) {
