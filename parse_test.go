@@ -40,7 +40,8 @@ func TestMakeExampleCmakePackages(t *testing.T) {
 		})
 		return err
 	})
-
+	projectRoot := "D:\\workspace\\workspace\\debuger\\xed\\kits\\xed-install-base-2024-11-27-win-x86-64\\examples"
+	subNames := make([]string, 0)
 	for _, project := range projects {
 		switch project.name {
 		case "xed", "Xed":
@@ -50,6 +51,7 @@ func TestMakeExampleCmakePackages(t *testing.T) {
 		}
 		project.name = strings.ReplaceAll(project.name, "Asmparse", "AsmParse")
 		mylog.Success(project.name, project.cFilePath)
+		subNames = append(subNames, project.name)
 		g := stream.NewGeneratedFile()
 		g.P(`
 cmake_minimum_required(VERSION 3.30)
@@ -69,7 +71,6 @@ set(CMAKE_C_STANDARD 11)
 
 		g.P("target_link_libraries(", project.name, " xed)")
 
-		projectRoot := "D:\\workspace\\workspace\\debuger\\xed\\kits\\xed-install-base-2024-11-27-win-x86-64\\examples"
 		projectRoot = filepath.Join(projectRoot, "examples", project.name)
 		stream.WriteTruncate(filepath.Join(projectRoot, cmakeListName), g.Bytes())
 		stream.WriteTruncate(filepath.Join(projectRoot, filepath.Base(project.cFilePath)), stream.NewBuffer(project.cFilePath))
@@ -77,6 +78,16 @@ set(CMAKE_C_STANDARD 11)
 		stream.WriteTruncate(filepath.Join(projectRoot, "xed.lib"), stream.NewBuffer("kits/xed-install-base-2024-11-27-win-x86-64/lib/xed.lib"))
 		stream.WriteTruncate(filepath.Join(projectRoot, "xed-ild.lib"), stream.NewBuffer("kits/xed-install-base-2024-11-27-win-x86-64/lib/xed-ild.lib"))
 	}
+
+	gSub := stream.NewGeneratedFile()
+	gSub.P("add_subdirectory(")
+	for _, name := range subNames {
+		gSub.P(name)
+	}
+	gSub.P(")")
+	projectRoot = filepath.Dir(projectRoot)
+	stream.WriteTruncate(filepath.Join(projectRoot, cmakeListName), gSub.Bytes())
+	// 复制 parse 测试命令   生成go单元测试签名
 }
 
 func TestParseAssemble64(t *testing.T) {
