@@ -47,14 +47,17 @@ func TestMergeHeader(t *testing.T) {
 		allNames = append(allNames, filepath.Base(path))
 		return err
 	})
-	for _, p := range names.List() {
-		mylog.Success(p.Key, p.Value)
-	}
+	//for _, p := range names.List() {
+	//	mylog.Success(p.Key, p.Value)
+	//}
 
 	last := names.Last()
 	lastIndex := last.Value
 
 	for _, name := range allNames {
+		if names.Has(name) {
+			continue
+		}
 		lastIndex++
 		names.Set(name, lastIndex)
 	}
