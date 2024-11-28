@@ -7,12 +7,30 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ddkwork/golibrary/stream"
-
 	"github.com/ddkwork/app/bindgen/clang"
 	"github.com/ddkwork/app/bindgen/gengo"
 	"github.com/ddkwork/golibrary/mylog"
+	"github.com/ddkwork/golibrary/stream"
 )
+
+func TestName(t *testing.T) {
+	const ignore = `// +build ignore
+
+`
+	filepath.Walk(".", func(path string, info fs.FileInfo, err error) error {
+		if strings.Contains(path, "cmake-build-debug") {
+			return err
+		}
+		if filepath.Ext(path) == ".c" {
+			b := stream.NewBuffer(path)
+			if !strings.HasPrefix(b.String(), ignore) {
+				b.ReplaceAll(strings.TrimSuffix(ignore, "\n"), "")
+				b.InsertString(0, ignore).ReWriteSelf()
+			}
+		}
+		return err
+	})
+}
 
 func TestMergeHeader(t *testing.T) {
 	names := stream.NewOrderedMap("", 0)
