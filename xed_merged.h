@@ -1,3 +1,4 @@
+#define XED_DLL
 #define XED_WINDOWS
 //------------------------------------------start xed-build-defines.h------------------------------------------
 /* BEGIN_LEGAL 

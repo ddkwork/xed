@@ -43,7 +43,7 @@ func TestMergeHeader(t *testing.T) {
 			}
 		}
 		debugIndex++
-		mylog.Info(debugIndex, filepath.Base(path))
+		// mylog.Info(debugIndex, filepath.Base(path))
 		allNames = append(allNames, filepath.Base(path))
 		return err
 	})
@@ -61,10 +61,11 @@ func TestMergeHeader(t *testing.T) {
 		names.Set(name, lastIndex)
 	}
 	b := stream.NewBuffer("")
+	b.WriteStringLn("#define XED_DLL")
 	b.WriteStringLn("#define XED_WINDOWS")
 	sep := "------------------------------------------"
 	for _, p := range names.List() {
-		mylog.Success(p.Key, p.Value)
+		// mylog.Success(p.Key, p.Value)
 
 		b.WriteStringLn("//" + sep + "start " + p.Key + sep)
 		// b.NewLine()
