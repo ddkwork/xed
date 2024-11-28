@@ -21,7 +21,7 @@ func TestName(t *testing.T) {
 		if strings.Contains(path, "cmake-build-debug") {
 			return err
 		}
-		if filepath.Ext(path) == ".c" {
+		if filepath.Ext(path) == ".c" || filepath.Ext(path) == ".cpp" {
 			b := stream.NewBuffer(path)
 			if !strings.HasPrefix(b.String(), ignore) {
 				b.ReplaceAll(strings.TrimSuffix(ignore, "\n"), "")
