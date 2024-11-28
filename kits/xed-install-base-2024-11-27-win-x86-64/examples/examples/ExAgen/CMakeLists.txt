@@ -4,9 +4,8 @@ project(ExAgen C)
 
 include_directories(../../include)
 link_directories(${CMAKE_SOURCE_DIR})
-add_executable(
+add_executable(ExAgen
 xed-ex-agen.c
 xed-examples-util.c
 )
-add_executable(ExAgen34)
 target_link_libraries(ExAgen xed)

@@ -4,9 +4,8 @@ project(Ex1 C)
 
 include_directories(../../include)
 link_directories(${CMAKE_SOURCE_DIR})
-add_executable(
+add_executable(Ex1
 xed-ex1.c
 xed-examples-util.c
 )
-add_executable(Ex134)
 target_link_libraries(Ex1 xed)

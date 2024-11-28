@@ -4,9 +4,8 @@ project(Avltree C)
 
 include_directories(../../include)
 link_directories(${CMAKE_SOURCE_DIR})
-add_executable(
+add_executable(Avltree
 avltree.c
 xed-examples-util.c
 )
-add_executable(Avltree34)
 target_link_libraries(Avltree xed)

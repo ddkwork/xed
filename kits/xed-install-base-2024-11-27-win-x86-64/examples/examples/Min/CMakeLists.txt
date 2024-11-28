@@ -4,9 +4,8 @@ project(Min C)
 
 include_directories(../../include)
 link_directories(${CMAKE_SOURCE_DIR})
-add_executable(
+add_executable(Min
 xed-min.c
 xed-examples-util.c
 )
-add_executable(Min34)
 target_link_libraries(Min xed)

@@ -4,9 +4,8 @@ project(DllDiscovery C)
 
 include_directories(../../include)
 link_directories(${CMAKE_SOURCE_DIR})
-add_executable(
+add_executable(DllDiscovery
 xed-dll-discovery.c
 xed-examples-util.c
 )
-add_executable(DllDiscovery34)
 target_link_libraries(DllDiscovery xed)

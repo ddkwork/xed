@@ -4,9 +4,8 @@ project(EncLang C)
 
 include_directories(../../include)
 link_directories(${CMAKE_SOURCE_DIR})
-add_executable(
+add_executable(EncLang
 xed-enc-lang.c
 xed-examples-util.c
 )
-add_executable(EncLang34)
 target_link_libraries(EncLang xed)

@@ -4,9 +4,8 @@ project(AsmParseMain C)
 
 include_directories(../../include)
 link_directories(${CMAKE_SOURCE_DIR})
-add_executable(
+add_executable(AsmParseMain
 xed-asmparse-main.c
 xed-examples-util.c
 )
-add_executable(AsmParseMain34)
 target_link_libraries(AsmParseMain xed)

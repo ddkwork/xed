@@ -21,7 +21,6 @@ type (
 )
 
 func TestMakeExampleCmakePackages(t *testing.T) {
-	t.Skip()
 	projects := make([]examples, 0)
 	filepath.Walk("kits", func(path string, info fs.FileInfo, err error) error {
 		if info.IsDir() {
@@ -63,11 +62,10 @@ set(CMAKE_C_STANDARD 11)
 		g.P("include_directories(../../include)")
 		g.P("link_directories(${CMAKE_SOURCE_DIR})")
 
-		g.P("add_executable(")
+		g.P("add_executable(", project.name)
 		g.P(filepath.Base(project.cFilePath))
 		g.P("xed-examples-util.c")
 		g.P(")")
-		g.P("add_executable(", project.name, '"', ")")
 
 		g.P("target_link_libraries(", project.name, " xed)")
 		projectRoot := "D:\\workspace\\workspace\\debuger\\xed\\kits\\xed-install-base-2024-11-27-win-x86-64\\examples"
@@ -75,8 +73,21 @@ set(CMAKE_C_STANDARD 11)
 		stream.WriteTruncate(filepath.Join(projectRoot, cmakeListName), g.Bytes())
 		stream.WriteTruncate(filepath.Join(projectRoot, filepath.Base(project.cFilePath)), stream.NewBuffer(project.cFilePath))
 		stream.WriteTruncate(filepath.Join(projectRoot, "xed-examples-util.c"), stream.NewBuffer("kits/xed-install-base-2024-11-27-win-x86-64/examples/xed-examples-util.c"))
+		stream.WriteTruncate(filepath.Join(projectRoot, "xed-examples-util.h"), stream.NewBuffer("kits/xed-install-base-2024-11-27-win-x86-64/examples/xed-examples-util.h"))
 		stream.WriteTruncate(filepath.Join(projectRoot, "xed.lib"), stream.NewBuffer("kits/xed-install-base-2024-11-27-win-x86-64/lib/xed.lib"))
 		stream.WriteTruncate(filepath.Join(projectRoot, "xed-ild.lib"), stream.NewBuffer("kits/xed-install-base-2024-11-27-win-x86-64/lib/xed-ild.lib"))
+		s := "package " + project.name + `
+import (
+	"testing"
+
+	"github.com/ddkwork/c2go"
+)
+
+func TestName(t *testing.T) {
+	c2go.Run()
+}
+`
+		stream.WriteTruncate(filepath.Join(projectRoot, project.name+"_test.go"), s)
 	}
 
 	gXedUintTest := stream.NewGeneratedFile()

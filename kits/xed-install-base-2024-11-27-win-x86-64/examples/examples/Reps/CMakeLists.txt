@@ -4,9 +4,8 @@ project(Reps C)
 
 include_directories(../../include)
 link_directories(${CMAKE_SOURCE_DIR})
-add_executable(
+add_executable(Reps
 xed-reps.c
 xed-examples-util.c
 )
-add_executable(Reps34)
 target_link_libraries(Reps xed)

@@ -4,9 +4,8 @@ project(DisasFilter C)
 
 include_directories(../../include)
 link_directories(${CMAKE_SOURCE_DIR})
-add_executable(
+add_executable(DisasFilter
 xed-disas-filter.c
 xed-examples-util.c
 )
-add_executable(DisasFilter34)
 target_link_libraries(DisasFilter xed)

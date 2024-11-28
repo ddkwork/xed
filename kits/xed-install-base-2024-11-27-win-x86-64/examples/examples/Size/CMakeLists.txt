@@ -4,9 +4,8 @@ project(Size C)
 
 include_directories(../../include)
 link_directories(${CMAKE_SOURCE_DIR})
-add_executable(
+add_executable(Size
 xed-size.c
 xed-examples-util.c
 )
-add_executable(Size34)
 target_link_libraries(Size xed)
