@@ -7,5 +7,8 @@ link_directories(${CMAKE_SOURCE_DIR})
 add_executable(AsmParse
 xed-asmparse.c
 xed-examples-util.c
+        xed-asmparse-main.c
+        xed-dot.c
+        xed-dot-prep.c
 )
 target_link_libraries(AsmParse xed)

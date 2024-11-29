@@ -118,7 +118,7 @@ void xed_map_region(const char* path,
 
 
 
-void xed_disas_test(xed_disas_info_t* di);
+static void xed_disas_test(xed_disas_info_t* di);
 
 
 
