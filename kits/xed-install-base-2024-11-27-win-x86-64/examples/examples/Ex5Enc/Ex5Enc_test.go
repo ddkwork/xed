@@ -1,4 +1,5 @@
 package Ex5Enc
+
 import (
 	"testing"
 

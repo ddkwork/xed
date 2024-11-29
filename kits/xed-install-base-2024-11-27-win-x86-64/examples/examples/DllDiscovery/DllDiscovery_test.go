@@ -1,4 +1,5 @@
 package DllDiscovery
+
 import (
 	"testing"
 

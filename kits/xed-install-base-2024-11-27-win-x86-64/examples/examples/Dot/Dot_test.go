@@ -1,4 +1,5 @@
 package Dot
+
 import (
 	"testing"
 

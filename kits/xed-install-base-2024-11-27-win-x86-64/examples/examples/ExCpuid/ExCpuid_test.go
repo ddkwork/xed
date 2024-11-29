@@ -1,4 +1,5 @@
 package ExCpuid
+
 import (
 	"testing"
 

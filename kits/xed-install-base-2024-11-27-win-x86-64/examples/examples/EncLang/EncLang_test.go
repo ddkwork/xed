@@ -1,4 +1,5 @@
 package EncLang
+
 import (
 	"testing"
 

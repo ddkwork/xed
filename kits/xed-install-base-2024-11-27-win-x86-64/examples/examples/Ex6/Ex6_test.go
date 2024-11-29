@@ -1,4 +1,5 @@
 package Ex6
+
 import (
 	"testing"
 

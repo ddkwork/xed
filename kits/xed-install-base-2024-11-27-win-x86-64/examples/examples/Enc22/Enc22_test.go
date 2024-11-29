@@ -1,4 +1,5 @@
 package Enc22
+
 import (
 	"testing"
 

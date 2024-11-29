@@ -1,4 +1,5 @@
 package SymbolTable
+
 import (
 	"testing"
 
