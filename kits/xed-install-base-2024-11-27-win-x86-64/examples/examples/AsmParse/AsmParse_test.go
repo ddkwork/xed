@@ -1,5 +1,4 @@
 package AsmParse
-
 import (
 	"testing"
 

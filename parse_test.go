@@ -59,7 +59,7 @@ set(CMAKE_C_STANDARD 11)
 		g.P("project(", project.name, " C)")
 		g.P()
 
-		g.P("include_directories(../../include)")
+		g.P("include_directories(include)")
 		g.P("link_directories(${CMAKE_SOURCE_DIR})")
 
 		g.P("add_executable(", project.name)
@@ -88,6 +88,7 @@ func TestName(t *testing.T) {
 }
 `
 		stream.WriteTruncate(filepath.Join(projectRoot, project.name+"_test.go"), s)
+		stream.CopyDir(filepath.Join(projectRoot, "include"), "kits/xed-install-base-2024-11-27-win-x86-64/include")
 	}
 
 	gXedUintTest := stream.NewGeneratedFile()
