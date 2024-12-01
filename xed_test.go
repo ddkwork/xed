@@ -1,12 +1,13 @@
 package xed
 
 import (
-	"github.com/ddkwork/golibrary/safemap"
 	"io/fs"
 	"path/filepath"
 	"strconv"
 	"strings"
 	"testing"
+
+	"github.com/ddkwork/golibrary/safemap"
 
 	"github.com/ddkwork/app/bindgen/clang"
 	"github.com/ddkwork/app/bindgen/gengo"
@@ -67,10 +68,9 @@ func TestMergeHeader(t *testing.T) {
 		return err
 	})
 	//for _, p := range names.List() {
-	//	mylog.Success(p.Key, p.Value)
+	//	mylog.Success(k, p.Value)
 	//}
-	last := names.Last()
-	lastIndex := last.Value
+	lastIndex := names.LastValue()
 
 	for _, name := range allNames {
 		if names.Has(name) {
@@ -83,12 +83,11 @@ func TestMergeHeader(t *testing.T) {
 	b.WriteStringLn("#define XED_DLL")
 	b.WriteStringLn("#define XED_WINDOWS")
 	sep := "------------------------------------------"
-	for _, p := range names.List() {
-		// mylog.Success(p.Key, p.Value)
-
-		b.WriteStringLn("//" + sep + "start " + p.Key + sep)
+	names.Range(func(k string, v int) bool {
+		// mylog.Success(k, p.Value)
+		b.WriteStringLn("//" + sep + "start " + k + sep)
 		// b.NewLine()
-		lines := stream.ToLines(filepath.Join(includePath, p.Key))
+		lines := stream.ToLines(filepath.Join(includePath, k))
 		for i, s := range lines {
 			if stream.IsIncludeLine(s) {
 				continue
@@ -98,9 +97,10 @@ func TestMergeHeader(t *testing.T) {
 				b.NewLine()
 			}
 		}
-		b.WriteStringLn("//" + sep + "end " + p.Key + sep)
+		b.WriteStringLn("//" + sep + "end " + k + sep)
 		b.NewLine()
-	}
+		return true
+	})
 	stream.WriteTruncate("xed_merged.h", b.Bytes())
 	clang.CheckHeadFile("xed_merged.h")
 }
