@@ -1,6 +1,7 @@
 package xed
 
 import (
+	"github.com/ddkwork/golibrary/safemap"
 	"io/fs"
 	"path/filepath"
 	"strconv"
@@ -33,7 +34,7 @@ func TestName(t *testing.T) {
 }
 
 func TestMergeHeader(t *testing.T) {
-	names := stream.NewOrderedMap("", 0)
+	names := new(safemap.M[string, int])
 	debugIndex := 0
 	includePath := "kits/xed-install-base-2024-11-27-win-x86-64/include/xed"
 	var allNames []string
