@@ -107,7 +107,10 @@ func TestMergeHeader(t *testing.T) {
 
 func TestBindXed(t *testing.T) {
 	path := "xed_merged.h"
-	TestMergeHeader(t)
+	path = "D:\\workspace\\workspace\\debuger\\xed\\kits\\xed-install-base-2024-11-27-win-x86-64\\include\\xed\\combined_header.h"
+	// TestMergeHeader(t)
+	clang.CheckHeadFile("D:\\workspace\\workspace\\debuger\\xed\\kits\\xed-install-base-2024-11-27-win-x86-64\\include\\xed\\combined_header.h")
+	return
 	pkg := gengo.NewPackage("xed")
 	mylog.Check(pkg.Transform("xed", &clang.Options{
 		Sources: []string{path},
