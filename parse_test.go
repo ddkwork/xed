@@ -34,7 +34,7 @@ func TestMakeExampleCmakePackages(t *testing.T) {
 		}
 		projects = append(projects, examples{
 			cFilePath:  path,
-			name:       stream.ToCamelUpper(stream.BaseName(path), false),
+			name:       stream.ToCamelUpper(stream.BaseName(path)),
 			cmakeLists: "",
 		})
 		return err
