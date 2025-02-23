@@ -45,7 +45,7 @@ func TestMergeHeader(t *testing.T) {
 		}
 		if filepath.Base(path) == "xed-interface.h" {
 			index := 0
-			for s := range stream.ReadFileToLines(path) {
+			for _, s := range stream.ReadFileToLines(path) {
 				if stream.IsIncludeLine(s) {
 					index++
 					s = strings.TrimPrefix(s, "#include")
@@ -83,7 +83,7 @@ func TestMergeHeader(t *testing.T) {
 	b.WriteStringLn("#define XED_DLL")
 	b.WriteStringLn("#define XED_WINDOWS")
 	sep := "------------------------------------------"
-	names.Range(func(k string, v int) bool {
+	for k := range names.Range() {
 		// mylog.Success(k, p.Value)
 		b.WriteStringLn("//" + sep + "start " + k + sep)
 		// b.NewLine()
@@ -95,8 +95,7 @@ func TestMergeHeader(t *testing.T) {
 		}
 		b.WriteStringLn("//" + sep + "end " + k + sep)
 		b.NewLine()
-		return true
-	})
+	}
 	stream.WriteTruncate("xed_merged.h", b.Bytes())
 	clang.CheckHeadFile("xed_merged.h")
 }
