@@ -18,9 +18,9 @@ require (
 	github.com/alecthomas/chroma/v2 v2.15.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/dc0d/caseconv v0.5.0 // indirect
-	github.com/ddkwork/app v0.0.0-20250305122938-3f4407a4e5df // indirect
+	github.com/ddkwork/app v0.0.0-20250305185906-863e065390d6 // indirect
 	github.com/ddkwork/toolbox v0.0.0-20250305101644-ff54d4ae6db5 // indirect
-	github.com/ddkwork/unison v0.0.0-20250305122932-9fffac22edaf // indirect
+	github.com/ddkwork/unison v0.0.0-20250305185902-8d4bdffe82ef // indirect
 	github.com/ddkwork/ux v0.0.0-20250303130840-fafe4917a132 // indirect
 	github.com/dlclark/regexp2 v1.11.5 // indirect
 	github.com/ebitengine/purego v0.9.0-alpha.2.0.20250211193246-e9fe9ab98c53 // indirect
