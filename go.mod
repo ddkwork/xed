@@ -3,7 +3,7 @@ module xed
 go 1.24.0
 
 require (
-	github.com/ddkwork/golibrary v0.0.91-0.20250306083701-983ead031b04
+	github.com/ddkwork/golibrary v0.0.91-0.20250306173050-a0dbb6222439
 	golang.org/x/sys v0.31.0
 )
 
@@ -18,12 +18,12 @@ require (
 	github.com/alecthomas/chroma/v2 v2.15.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/dc0d/caseconv v0.5.0 // indirect
-	github.com/ddkwork/app v0.0.0-20250306061027-fe2ef3009132 // indirect
-	github.com/ddkwork/toolbox v0.0.0-20250306061020-57d9d0f8a742 // indirect
-	github.com/ddkwork/unison v0.0.0-20250306061023-0f7a1c214589 // indirect
-	github.com/ddkwork/ux v0.0.0-20250305200734-dcfff43b3e2b // indirect
+	github.com/ddkwork/app v0.0.0-20250306173051-f1a1fac976d1 // indirect
+	github.com/ddkwork/toolbox v0.0.0-20250306080448-31b91d349a9d // indirect
+	github.com/ddkwork/unison v0.0.0-20250306084349-57e3d988ab14 // indirect
+	github.com/ddkwork/ux v0.0.0-20250307192701-99749ca4b442 // indirect
 	github.com/dlclark/regexp2 v1.11.5 // indirect
-	github.com/ebitengine/purego v0.9.0-alpha.2.0.20250211193246-e9fe9ab98c53 // indirect
+	github.com/ebitengine/purego v0.9.0-alpha.2.0.20250319192307-d99d2bef7bd5 // indirect
 	github.com/edsrzf/mmap-go v1.1.0 // indirect
 	github.com/fatih/color v1.17.0 // indirect
 	github.com/go-text/typesetting v0.3.0 // indirect
@@ -32,15 +32,15 @@ require (
 	github.com/gorpher/gowin32 v0.0.11 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
-	github.com/oligo/gvcode v0.0.3-0.20250301165326-8108008a5bcb // indirect
+	github.com/oligo/gvcode v0.1.1 // indirect
 	github.com/pkg/term v1.2.0-beta.2 // indirect
 	github.com/richardwilkes/json v0.3.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/saferwall/pe v1.5.6 // indirect
 	github.com/secDre4mer/pkcs7 v0.0.0-20240322103146-665324a4461d // indirect
 	github.com/yuin/goldmark v1.7.8 // indirect
-	golang.org/x/exp v0.0.0-20250228200357-dead58393ab7 // indirect
-	golang.org/x/exp/shiny v0.0.0-20250228200357-dead58393ab7 // indirect
+	golang.org/x/exp v0.0.0-20250305212735-054e65f0b394 // indirect
+	golang.org/x/exp/shiny v0.0.0-20250305212735-054e65f0b394 // indirect
 	golang.org/x/image v0.25.0 // indirect
 	golang.org/x/mod v0.24.0 // indirect
 	golang.org/x/net v0.37.0 // indirect
