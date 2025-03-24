@@ -3,13 +3,13 @@ module xed
 go 1.24.0
 
 require (
-	github.com/ddkwork/golibrary v0.0.91-0.20250306173050-a0dbb6222439
+	github.com/ddkwork/golibrary v0.0.91-0.20250324091236-7773f1c26781
 	golang.org/x/sys v0.31.0
 )
 
 require (
 	gioui.org v0.8.1-0.20250223181602-72a72a2bc21a // indirect
-	gioui.org/cmd v0.8.0 // indirect
+	gioui.org/cmd v0.8.1-0.20250321120711-01ffdf788daa // indirect
 	gioui.org/cpu v0.0.0-20220412190645-f1e9e8c3b1f7 // indirect
 	gioui.org/example v0.8.2-0.20250227093625-76286d538a44 // indirect
 	gioui.org/shader v1.0.8 // indirect
@@ -18,10 +18,10 @@ require (
 	github.com/alecthomas/chroma/v2 v2.15.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/dc0d/caseconv v0.5.0 // indirect
-	github.com/ddkwork/app v0.0.0-20250306173051-f1a1fac976d1 // indirect
-	github.com/ddkwork/toolbox v0.0.0-20250306080448-31b91d349a9d // indirect
-	github.com/ddkwork/unison v0.0.0-20250306084349-57e3d988ab14 // indirect
-	github.com/ddkwork/ux v0.0.0-20250307192701-99749ca4b442 // indirect
+	github.com/ddkwork/app v0.0.0-20250324065822-f12616f947e1 // indirect
+	github.com/ddkwork/toolbox v0.0.0-20250320161820-8c695d9534c1 // indirect
+	github.com/ddkwork/unison v0.0.0-20250320161823-481d583a5ca7 // indirect
+	github.com/ddkwork/ux v0.0.0-20250324055700-65ee8f77e2b0 // indirect
 	github.com/dlclark/regexp2 v1.11.5 // indirect
 	github.com/ebitengine/purego v0.9.0-alpha.2.0.20250319192307-d99d2bef7bd5 // indirect
 	github.com/edsrzf/mmap-go v1.1.0 // indirect
