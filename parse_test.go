@@ -160,17 +160,17 @@ func TestParseAssemble64(t *testing.T) {
 	assemble64 := ParseAssemble[uint64](0, " mov rax,qword ptr ss:[rsp+40]", func(text string, value uint64) {
 		mylog.Info(text, value)
 	})
-	mylog.Struct("assemble64", assemble64)
+	mylog.Struct(assemble64)
 
 	assemble64 = ParseAssemble[uint64](0, " or dword ptr ds:[rax+68],r14d ", func(text string, value uint64) {
 		mylog.Info(text, value)
 	})
-	mylog.Struct("assemble64", assemble64)
+	mylog.Struct(assemble64)
 
 	assemble64 = ParseAssemble[uint64](0, "lea r8,qword ptr ds:[7FFC0A3DD270]", func(text string, value uint64) {
 		mylog.Info(text, value)
 	})
-	mylog.Struct("assemble64", assemble64) // 失败了，感觉还是不够稳定
+	mylog.Struct(assemble64) // 失败了，感觉还是不够稳定
 
 	// 00007FFC0A36B436 | E8 75B2F4FF              | call ntdll.7FFC0A2B66B0                 |
 	// 00007FFC0A36B43B | E9 83000000              | jmp ntdll.7FFC0A36B4C3                  |
@@ -201,5 +201,5 @@ func TestParseAssemble32(t *testing.T) {
 	assemble32 := ParseAssemble[uint32](0, "mov dword ptr ds:[edi+5E8],eax", func(text string, value uint32) {
 		mylog.Info(text, value)
 	})
-	mylog.Struct("assemble32", assemble32)
+	mylog.Struct(assemble32)
 }
