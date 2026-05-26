@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.23'
+
+      - name: Clone ewdk
+        run: |
+          cd $env:GITHUB_WORKSPACE\..
+          git clone https://github.com/ddkwork/ewdk.git
+
+      - name: Cache EWDK ISO
+        uses: actions/cache@v5
+        with:
+          path: C:\Users\runneradmin\AppData\Local\Temp\ewdk.iso
+          key: ewdk-iso
+
+      - name: Setup EWDK
+        working-directory: ..\ewdk
+        run: |
+          go run scripts/get_ewdk_url.go
+          $url = Get-Content "$env:GITHUB_ENV" | Select-String "EWDK_ISO_URL=" | ForEach-Object { $_.ToString().Replace("EWDK_ISO_URL=","").Trim() }
+          Invoke-WebRequest -Uri $url -OutFile "$env:TEMP\ewdk.iso" -UseBasicParsing
+          go run .
+
+      - name: Clone XED
+        run: |
+          git clone --recursive https://github.com/intel/xed.git clone/xed
+          git clone https://github.com/intel/mbuild.git clone/mbuild
+
+      - name: Build XED DLL
+        run: |
+          pip install mbuild
+          cd clone/xed
+          python mfile.py --shared --msvs-version 17 install
+          $kitDir = Get-ChildItem kits -Directory | Select-Object -First 1
+          if ($kitDir) {
+            $dll = Get-ChildItem "$($kitDir.FullName)/bin" -Filter "*.dll" -ErrorAction SilentlyContinue | Select-Object -First 1
+            if ($dll) { Copy-Item $dll.FullName "../../xed.dll" }
+          }
+
+      - name: Generate bindings
+        run: go test -run TestGenerate -v -timeout 120s
+
+      - name: Test
+        run: go test -v -skip TestGenerate
+
+      - name: Push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Update bindings"
+          git push

@@ -1,0 +1,17 @@
+﻿*.ps1
+*.log
+build/
+clone/
+cachedir/
+project/
+vendor
+.idea/
+*.apk
+*.json
+todo/
+clone/
+build_debug/
+build/
+/init.cmd
+/cmds.cmd
+.codeartsdoer/
